@@ -7,5 +7,3 @@ Project for research engine in javascript
 ![](https://img.shields.io/github/stars/pandao/editor.md.svg)
 
 **Table of Contents**
-
-[TOCM]

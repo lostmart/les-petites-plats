@@ -1,0 +1,36 @@
+.header img {
+	max-width: 268px;
+}
+
+/*  form  */
+.input-group .form-control {
+	background-color: #e7e7e7;
+	border-right: none;
+}
+
+.input-group .input-group-text {
+	background-color: #e7e7e7;
+	padding-right: 1em;
+	cursor: pointer;
+	height: 100%;
+}
+
+/* card  */
+
+.card .card-body {
+	background-color: #e7e7e7;
+}
+.card .list-group-item {
+	border: none;
+	padding: 0;
+	background-color: #e7e7e7;
+}
+
+.card .card-title {
+	font-size: 18px;
+}
+
+.card .card-text,
+.card .list-group-item {
+	font-size: 12px;
+}

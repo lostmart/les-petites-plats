@@ -9,11 +9,119 @@
 			rel="stylesheet"
 			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 			crossorigin="anonymous" />
+		<link rel="stylesheet" href="./css/style.css" />
 		<title>les petits plats</title>
 	</head>
 	<body>
-        <header>
-            <img src="" alt="">
-        </header>
-    </body>
+		<header class="header">
+			<a href="/">
+				<img class="mx-auto d-block" src="./logo-les-petits-plats.png" alt="" />
+			</a>
+		</header>
+		<main>
+			<div class="container">
+				<form>
+					<div class="input-group">
+						<input
+							type="text"
+							class="form-control p-3"
+							placeholder="Rechercher une recette"
+							aria-label="Rechercher une recette"
+							id="Rechercher"
+							aria-describedby="Rechercher" />
+						<label for="Rechercher">
+							<span class="input-group-text">
+								<img src="./assets/search.svg" alt="Rechercher" />
+							</span>
+						</label>
+					</div>
+				</form>
+				<div>
+					<button class="btn badge bg-primary mt-2 mb-2">
+						Coco
+						<img src="./assets/close-cross.svg" alt="close button" />
+					</button>
+					<div class="input-group">
+						<button class="btn btn-primary">Ingredientes</button>
+						<button class="btn btn-success">Ingredientes</button>
+						<button class="btn btn-danger">Ingredientes</button>
+					</div>
+				</div>
+				<div class="accordion" id="accordionExample">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="headingOne">
+							<button
+								class="accordion-button"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseOne"
+								aria-expanded="true"
+								aria-controls="collapseOne">
+								Accordion Item #1
+							</button>
+						</h2>
+						<div
+							id="collapseOne"
+							class="accordion-collapse collapse show"
+							aria-labelledby="headingOne"
+							data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								<strong>This is the first item's accordion body.</strong> It is
+								shown by default, until the collapse plugin adds the appropriate
+								worth noting that just about any HTML can go within the
+								<code>.accordion-body</code>, though the transition does limit
+								overflow.
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<section>
+					<article class="card" style="width: 380px">
+						<img
+							src="https://images.pexels.com/photos/2109099/pexels-photo-2109099.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+							class="card-img-top"
+							alt="..." />
+						<div class="card-body">
+							<div class="d-flex justify-content-between mb-2">
+								<h5 class="card-title">Limonade de Coco</h5>
+								<div>
+									<img src="./assets/watch.svg" alt="time - clock" />
+									<span> 10 min </span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<ul class="list-group">
+										<li class="list-group-item">
+											<strong>Lait de coco:</strong> 400ml
+										</li>
+										<li class="list-group-item">
+											<strong>Jus de citron:</strong> 2
+										</li>
+										<li class="list-group-item">
+											<strong>Créme de coco:</strong> 4 cuillères
+										</li>
+										<li class="list-group-item"><strong>Sucre:</strong> 20g</li>
+										<li class="list-group-item"><strong>Glaçons:</strong> 2</li>
+									</ul>
+								</div>
+								<div class="col">
+									<p class="card-text">
+										Mettre les glaçons à votre goût dans le blender, ajouter le
+										lait, la crème de coco, le jus de 2 citrons et le sucre.
+										Mixer jusqu'à avoir la consistence désirée.
+									</p>
+								</div>
+							</div>
+						</div>
+					</article>
+				</section>
+			</div>
+		</main>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"></script>
+	</body>
 </html>
