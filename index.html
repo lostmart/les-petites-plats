@@ -20,61 +20,54 @@
 		</header>
 		<main>
 			<div class="container">
-				<form>
-					<div class="input-group">
-						<input
-							type="text"
-							class="form-control p-3"
-							placeholder="Rechercher une recette"
-							aria-label="Rechercher une recette"
-							id="Rechercher"
-							aria-describedby="Rechercher" />
-						<label for="Rechercher">
-							<span class="input-group-text">
-								<img src="./assets/search.svg" alt="Rechercher" />
-							</span>
-						</label>
-					</div>
-				</form>
-				<div>
-					<button class="btn badge bg-primary mt-2 mb-2">
-						Coco
-						<img src="./assets/close-cross.svg" alt="close button" />
-					</button>
-					<div class="input-group">
-						<button class="btn btn-primary">Ingredientes</button>
-						<button class="btn btn-success">Ingredientes</button>
-						<button class="btn btn-danger">Ingredientes</button>
-					</div>
-				</div>
-				<div class="accordion" id="accordionExample">
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="headingOne">
-							<button
-								class="accordion-button"
-								type="button"
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseOne"
-								aria-expanded="true"
-								aria-controls="collapseOne">
-								Accordion Item #1
-							</button>
-						</h2>
-						<div
-							id="collapseOne"
-							class="accordion-collapse collapse show"
-							aria-labelledby="headingOne"
-							data-bs-parent="#accordionExample">
-							<div class="accordion-body">
-								<strong>This is the first item's accordion body.</strong> It is
-								shown by default, until the collapse plugin adds the appropriate
-								worth noting that just about any HTML can go within the
-								<code>.accordion-body</code>, though the transition does limit
-								overflow.
+				<article class="form-container">
+					<form>
+						<div class="input-group">
+							<input
+								type="text"
+								class="form-control p-3"
+								placeholder="Rechercher une recette"
+								aria-label="Rechercher une recette"
+								id="Rechercher"
+								aria-describedby="Rechercher" />
+							<label for="Rechercher">
+								<span class="input-group-text">
+									<img src="./assets/search.svg" alt="Rechercher" />
+								</span>
+							</label>
+						</div>
+					</form>
+					<div>
+						<button
+							class="btn badge bg-primary my-3 px-3 d-flex align-items-center gap-2">
+							Coco
+							<img src="./assets/close-cross.svg" alt="close button" />
+						</button>
+
+						<div class="d-flex">
+							<div class="alert alert-primary d-flex align-items-center me-4">
+								<input type="text" placeholder="Ingredients" />
+								<button class="btn">
+									<img src="./assets/arrow-spand.svg" alt="" />
+								</button>
+							</div>
+
+							<div class="alert alert-success d-flex align-items-center me-4">
+								<input type="text" placeholder="Appareils" />
+								<button class="btn">
+									<img src="./assets/arrow-spand.svg" alt="" />
+								</button>
+							</div>
+
+							<div class="alert alert-danger d-flex align-items-center me-4">
+								<input type="text" placeholder="Ustensiles" />
+								<button class="btn">
+									<img src="./assets/arrow-spand.svg" alt="" />
+								</button>
 							</div>
 						</div>
 					</div>
-				</div>
+				</article>
 
 				<section>
 					<article class="card" style="width: 380px">
