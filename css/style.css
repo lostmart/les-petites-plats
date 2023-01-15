@@ -23,6 +23,11 @@
 
 /* card  */
 
+.card {
+	max-width: 380px;
+	margin-bottom: 60px;
+}
+
 .card .card-body {
 	background-color: #e7e7e7;
 }
