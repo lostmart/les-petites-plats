@@ -21,6 +21,18 @@
 	height: 100%;
 }
 
+.fiters-containers .list-group-item {
+	color: white;
+	background-color: transparent;
+	border: none;
+	min-width: 200px;
+	cursor: pointer;
+}
+
+.fiters-containers .list-group-item:hover {
+	font-weight: bold;
+}
+
 /* card  */
 
 .card {
@@ -53,6 +65,14 @@
 	justify-content: space-between;
 	color: white;
 	padding: 1rem 0.6rem;
+}
+
+.alert-primary div:first-child {
+	transform: translateY(-6px);
+}
+
+.alert::-webkit-scrollbar {
+	display: none;
 }
 
 .alert-primary {
