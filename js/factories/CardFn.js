@@ -1,4 +1,4 @@
-import RecipeModel from '../classes/RecipeModel.js'
+import RecipeModel from "../classes/RecipeModel.js"
 
 // ingredients from all the recipies
 export let ingredientsArray = []
@@ -13,20 +13,20 @@ function domCard(card) {
 	// creates an object based on the CardModel class
 	const recipe = new RecipeModel(card)
 	// template from index.html
-	const card_template = document.querySelector('[data-card-template]')
+	const card_template = document.querySelector("[data-card-template]")
 
 	// elements for the card
 	const domCard = card_template.content.cloneNode(true).children[0]
-	const cardImg = domCard.querySelector('[data-card-img]')
-	const cardTime = domCard.querySelector('[data-card-time]')
+	const cardImg = domCard.querySelector("[data-card-img]")
+	const cardTime = domCard.querySelector("[data-card-time]")
 	cardTime.children[1].textContent = `${recipe.time} min`
-	const cardTitle = domCard.querySelector('.card-title')
-	const cardText = domCard.querySelector('.card-text')
-	const ul = domCard.querySelector('.list-group')
+	const cardTitle = domCard.querySelector(".card-title")
+	const cardText = domCard.querySelector(".card-text")
+	const ul = domCard.querySelector(".list-group")
 	// ingredients
 	recipe.ingredients.forEach((ingr) => {
-		const li = document.createElement('li')
-		li.classList.add('list-group-item')
+		const li = document.createElement("li")
+		li.classList.add("list-group-item")
 		li.innerHTML = `<strong>${ingr.ingredient}:</strong> ${ingr.quantity} `
 		// checks if there is units of measure
 		ingr.unit ? (li.innerHTML += ingr.unit) : false
@@ -43,17 +43,28 @@ function domCard(card) {
 	//console.log(ingredientsArray)
 	//console.log(ustensilsArray)
 
-	cardImg.src = '../assets/bg-img.jpg'
+	cardImg.src = "../assets/bg-img.jpg"
 	cardImg.alt = recipe.name
-	cardText.textContent = recipe.description.slice(0, 174) + '...'
+	cardText.textContent = recipe.description.slice(0, 174) + "..."
 	cardTitle.textContent = recipe.name
 
 	return domCard
 }
 
-function filterBtn(value) {
+// handle lists click
+function handleListClick(value) {
+	const filters_container = document.querySelector("[data-filters]")
 	checkIncludes(value, ingredientsArrayFilter)
-	console.log(ingredientsArrayFilter)
+	//filters_container.textContent = ""
+
+	filters_container.append(filterBtn(value))
+}
+
+function filterBtn(listValue) {
+	const data_filter_btn = document.querySelector("[data-filter-btn]")
+	const listDom = data_filter_btn.content.cloneNode(true).children[0]
+	listDom.prepend(listValue)
+	return listDom
 }
 
 // checks if value is repetaed and then adds it to an array
@@ -66,18 +77,18 @@ function checkIncludes(value, arrayType) {
 
 // will return a ul element filled with items with a class "list-group-item"
 export function domLists(elementsArray) {
-	const ul = document.createElement('ul')
-	ul.classList.add('list-group')
-	ul.classList.add('list-group-horizontal')
-	ul.classList.add('flex-wrap')
-	ul.classList.add('justify-content-around')
+	const ul = document.createElement("ul")
+	ul.classList.add("list-group")
+	ul.classList.add("list-group-horizontal")
+	ul.classList.add("flex-wrap")
+	ul.classList.add("justify-content-around")
 
 	elementsArray.forEach((element) => {
-		const li = document.createElement('li')
-		li.classList.add('list-group-item')
-		li.addEventListener('click', (e) => {
+		const li = document.createElement("li")
+		li.classList.add("list-group-item")
+		li.addEventListener("click", (e) => {
 			e.stopPropagation()
-			filterBtn(e.target.textContent)
+			handleListClick(e.target.textContent)
 		})
 		li.textContent = element
 		ul.append(li)
