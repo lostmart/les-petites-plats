@@ -52,7 +52,6 @@ ingredients_btn.addEventListener('click', (e) => {
 	largeBtn = e.target.parentElement.parentElement.parentElement
 	openBigBtn()
 	largeBtn.append(domLists(ingredientsArray))
-	console.log(largeBtn)
 })
 
 appliance_btn.addEventListener('click', (e) => {

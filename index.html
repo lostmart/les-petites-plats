@@ -22,7 +22,7 @@
 			<div class="container">
 				<article class="form-container">
 					<form>
-						<div class="input-group">
+						<div class="input-group mb-3">
 							<input
 								type="search"
 								class="form-control p-3"
@@ -39,11 +39,13 @@
 						</div>
 					</form>
 					<div>
-						<button
-							class="btn badge bg-primary my-3 px-3 d-flex align-items-center gap-2">
-							Coco
-							<img src="./assets/close-cross.svg" alt="close button" />
-						</button>
+						<template data-filter-btn>
+							<button
+								class="btn badge bg-primary my-3 px-3 d-flex align-items-center gap-2">
+								ingrediente
+								<img src="./assets/close-cross.svg" alt="close button" />
+							</button>
+						</template>
 
 						<div class="fiters-containers d-flex">
 							<div class="alert alert-primary me-4">

@@ -51,6 +51,13 @@ function domCard(card) {
 	return domCard
 }
 
+function filterBtn(value) {
+	checkIncludes(value, ingredientsArrayFilter)
+	console.log(ingredientsArrayFilter)
+}
+
+// checks if value is repetaed and then adds it to an array
+// accepts a value(String) and an Array
 function checkIncludes(value, arrayType) {
 	if (!arrayType.includes(value)) {
 		arrayType.push(value)
@@ -70,7 +77,7 @@ export function domLists(elementsArray) {
 		li.classList.add('list-group-item')
 		li.addEventListener('click', (e) => {
 			e.stopPropagation()
-			console.log(e.target.textContent)
+			filterBtn(e.target.textContent)
 		})
 		li.textContent = element
 		ul.append(li)
