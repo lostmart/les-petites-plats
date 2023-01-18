@@ -53,47 +53,73 @@ function domCard(card) {
 
 // handle lists click
 function handleListClick(value) {
-	const filters_container = document.querySelector('[data-filters]')
 	checkIncludes(value, ingredientsArrayFilter)
-	//filters_container.textContent = ""
-
-	//filters_container.append(filterBtn(value))
-	console.log(ingredientsArrayFilter)
+	// console.log(ingredientsArrayFilter)
 }
 
 function filterBtn(listValue) {
 	const data_filter_btn = document.querySelector('[data-filter-btn]')
 	const listDom = data_filter_btn.content.cloneNode(true).children[0]
-	listDom.setAttribute('data-btn-filter', 'ingredients')
+	// console.log(listDom)
+	listDom.value = listValue
 	const btnImg = listDom.querySelector('img')
 	const span = listDom.querySelector('span')
 	span.textContent = listValue
 	listDom.prepend(span)
-	// BIIIIG HERE !!!
-	// wrong value being passed !
+	// getting the right value (image/span/button) clicked
 	listDom.addEventListener('click', (e) => {
-		const itemValue = e.target.textContent
+		let itemValue = null
+		e.stopPropagation()
+		itemValue = getBtnValue(e.target)
+		//console.dir(e.target.nodeName)
+
+		// const btns = document.querySelectorAll('button[data-btn-filter]')
+
+		//btns.forEach((btn) => console.log(btn))
+
 		removeItem(itemValue, ingredientsArrayFilter)
 	})
+	/*
 	btnImg.addEventListener('click', (e) => {
 		e.stopPropagation()
+		console.log(e.target)
 		const itemValue = span.textContent
-		removeItem(itemValue, ingredientsArrayFilter)
+		// removeItem(itemValue, ingredientsArrayFilter)
 	})
+	*/
 	return listDom
+}
+
+// get value from the button - evaluates what was clicked (img, span or button)
+function getBtnValue(node) {
+	let btnVal = null
+	switch (node.nodeName) {
+		case 'SPAN':
+			btnVal = node.textContent
+			break
+		case 'IMG':
+			btnVal = node.parentNode.value
+			break
+		case 'BUTTON':
+			btnVal = node.value
+			break
+		default:
+			console.log(node.nodeName)
+	}
+	return btnVal
 }
 
 // remove an element from filter list
 function removeItem(itemValue, itemsArray) {
-	console.log(itemValue)
+	console.log(itemValue, itemsArray)
 	const itemIndx = itemsArray.indexOf(itemValue)
-	const btns_nodes = document.querySelectorAll(
-		'[data-btn-filter="ingredients"]'
-	)
+	const btns_node_array = document.querySelectorAll('.badge')
+	btns_node_array[itemIndx].remove()
+	// btn_node.remove()
+	//console.log(btn_node)
+
 	if (itemIndx > 0) {
 		itemsArray.splice(itemIndx, 1)
-		btns_nodes[itemIndx].remove()
-		// console.log(btns_nodes[itemIndx])
 	}
 }
 
