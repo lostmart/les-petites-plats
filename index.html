@@ -8,8 +8,7 @@
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 			rel="stylesheet"
 			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-			crossorigin="anonymous"
-		/>
+			crossorigin="anonymous" />
 		<link rel="stylesheet" href="./css/style.css" />
 		<title>les petits plats</title>
 	</head>
@@ -31,8 +30,7 @@
 								aria-label="Rechercher une recette"
 								id="Rechercher"
 								autocomplete="off"
-								aria-describedby="Rechercher"
-							/>
+								aria-describedby="Rechercher" />
 							<label for="Rechercher">
 								<span class="input-group-text">
 									<img src="./assets/search.svg" alt="Rechercher" />
@@ -41,25 +39,24 @@
 						</div>
 					</form>
 					<div>
-						<div data-filters>
+						<div class="d-flex flex-wrap" data-filters>
 							<template data-filter-btn>
 								<button
-									class="btn badge bg-primary my-3 px-3 d-flex align-items-center gap-2"
-								>
+									class="btn badge bg-primary my-3 me-3 px-3 d-flex align-items-center gap-2">
+									<span></span>
 									<img src="./assets/close-cross.svg" alt="close button" />
 								</button>
 							</template>
 						</div>
 
-						<div class="fiters-containers d-flex">
+						<div class="fiters-containers d-flex flex-wrap">
 							<div class="alert alert-primary me-4">
 								<div class="d-flex align-items-center flex-grow-1">
 									<input type="text" placeholder="Ingredients" />
 									<button class="btn" data-btn="ingredients">
 										<img
 											src="./assets/arrow-spand.svg"
-											alt="show ingredients"
-										/>
+											alt="show ingredients" />
 									</button>
 								</div>
 								<!-- 
@@ -94,8 +91,7 @@
 
 				<section
 					data-cards-container
-					class="d-flex flex-wrap justify-content-between"
-				>
+					class="d-flex flex-wrap justify-content-between">
 					<template data-card-template>
 						<article class="card">
 							<img src="" alt="" data-card-img />
@@ -165,8 +161,7 @@
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-			crossorigin="anonymous"
-		></script>
+			crossorigin="anonymous"></script>
 		<script src="./js/script.js" type="module"></script>
 	</body>
 </html>
