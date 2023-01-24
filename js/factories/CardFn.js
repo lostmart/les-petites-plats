@@ -71,7 +71,7 @@ function filterBtn(listValue) {
 		let itemValue = null
 		e.stopPropagation()
 		itemValue = getBtnValue(e.target)
-		//console.dir(e.target.nodeName)
+		// console.dir(e.target.nodeName)
 
 		// const btns = document.querySelectorAll('button[data-btn-filter]')
 
@@ -150,6 +150,7 @@ export function domLists(elementsArray) {
 		li.addEventListener('click', (e) => {
 			e.stopPropagation()
 			handleListClick(e.target.textContent)
+			console.log('running the filter click')
 		})
 		li.textContent = element
 		ul.append(li)
