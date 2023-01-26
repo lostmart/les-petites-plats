@@ -36,8 +36,9 @@
 /* card  */
 
 .card {
-	max-width: 380px;
+	width: 29.35%;
 	margin-bottom: 60px;
+	min-width: 328px;
 }
 
 .card .card-body {
