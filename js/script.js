@@ -1,10 +1,11 @@
-import RecipeFactory from './factories/RecipeFactory.js'
+import { recipes } from "../../data/recipes.js"
+import RecipeFactory from "./factories/RecipeFactory.js"
 
-const receipie = new RecipeFactory([
-	'id',
-	'ingredients',
-	'description',
-	'appliance',
-])
+// array of all the receipies
+let receipiesArray = []
 
-console.log(receipie);
+recipes.forEach((recipe) => {
+	const { id, name, ingredients } = recipe
+	const newRecip = new RecipeFactory([id, name, ingredients])
+	console.log(newRecip)
+})
