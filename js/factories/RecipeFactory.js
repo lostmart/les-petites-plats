@@ -1,5 +1,9 @@
+import OptionsModel from '../classes/OptionsModel.js'
+import { recipes } from '../../data/recipes.js'
+
 const recipeMockData = (options) => {
 	// get data from mock filesystem
+	console.log(recipes)
 }
 
 class RecipeFactory {

@@ -11,3 +11,5 @@ class OptionsModel {
 		return this.options.find((option) => Object.keys(option).includes(search))
 	}
 }
+
+export default OptionsModel
