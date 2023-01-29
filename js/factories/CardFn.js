@@ -1,5 +1,5 @@
 import RecipeModel from '../classes/RecipeModel.js'
-import { filterDom, filterDomByTags } from '../script.js'
+import { filterDom, filterDomByTags, removeItem } from '../script.js'
 
 // ingredients from all the recipies
 export let ingredientsArray = []
@@ -11,6 +11,7 @@ export let ingredientsArrayFilter = []
 
 //  returns a DOM element ready to append
 function domCard(card) {
+	console.log(card)
 	// creates an object based on the CardModel class
 	const recipe = new RecipeModel(card)
 	// template from index.html
@@ -111,6 +112,7 @@ function getBtnValue(node) {
 }
 
 // remove an element from filter list
+/*
 function removeItem(itemValue, itemsArray) {
 	const itemIndx = itemsArray.indexOf(itemValue)
 	const btns_node_array = document.querySelectorAll('.badge')
@@ -124,6 +126,7 @@ function removeItem(itemValue, itemsArray) {
 	filterDomByTags(itemValue, 'card-ingredients')
 	console.log(itemValue, itemsArray)
 }
+*/
 
 // checks if value is repetaed and then adds it to an array
 // accepts a value(String) and an Array
