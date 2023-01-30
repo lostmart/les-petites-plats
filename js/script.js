@@ -1,34 +1,40 @@
-import recipeMockData from './factories/RecipeFactory.js'
-import { createCard } from './factories/Utils.js'
+import recipeMockData from "./factories/RecipeFactory.js"
+import { createCard } from "./factories/Utils.js"
 
-const cards_container = document.querySelector('[data-cards-container]')
+const cards_container = document.querySelector("[data-cards-container]")
 const ingredients_btn = document.querySelector('[data-btn="ingredients"]')
 const appliance_btn = document.querySelector('[data-btn="appliance"]')
 const ustensils_btn = document.querySelector('[data-btn="ustensils"]')
-const rechGeneral = document.querySelector('#Rechercher')
-
-//console.log((cards_container.innerHTML = 'el amor'))
+const rechGeneral = document.querySelector("#Rechercher")
 
 // array of all the receipies
 let receipiesArray = new recipeMockData([
-	'id',
-	'name',
-	'ingredients',
-	'description',
-	'ustensils',
-	'appliance',
+	"id",
+	"name",
+	"ingredients",
+	"description",
+	"ustensils",
+	"appliance",
 ])
 
 let { recipes } = receipiesArray
 
-recipes.forEach((recipie) => cards_container.append(createCard(recipie)))
+populateDom()
 
-rechGeneral.addEventListener('input', (e) => {
+rechGeneral.addEventListener("input", (e) => {
 	const value = e.target.value.toLowerCase()
 	if (value.length >= 3) {
-		console.log(receipiesArray)
+		const result = receipiesArray.filterByParameters({
+			type: "name",
+			name: value,
+		})
+		console.log(result)
 	}
 })
+
+function populateDom() {
+	recipes.forEach((recipie) => cards_container.append(createCard(recipie)))
+}
 
 /*
 rechGeneral.addEventListener('keydown', (e) => {

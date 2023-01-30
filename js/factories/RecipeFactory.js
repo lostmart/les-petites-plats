@@ -1,5 +1,5 @@
-import OptionsModel from '../classes/OptionsModel.js'
-import { recipes } from '../../data/recipes.js'
+import OptionsModel from "../classes/OptionsModel.js"
+import { recipes } from "../../data/recipes.js"
 
 export const recipeMockData = (options) => {
 	// get data from mock filesystem
@@ -23,7 +23,7 @@ class RecipeFactory {
 	handleFilterByParameters(params) {
 		// Logic Filter
 		switch (params.type) {
-			case 'name':
+			case "name":
 				return this.getByName(params.name)
 			default:
 				return this.handleSearch(params)
@@ -34,7 +34,9 @@ class RecipeFactory {
 
 	getById(id) {}
 
-	getByName(name) {}
+	getByName(name) {
+		return recipes.find((recip) => recip.name.includes(name))
+	}
 
 	getByAppliance(appliance) {}
 
