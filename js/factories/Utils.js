@@ -43,7 +43,6 @@ export const createCard = (data) => {
 		li.innerHTML = `<strong>${ingr.ingredient}:</strong> ${ingr.quantity} `
 		ingr.unit ? (li.innerHTML += ingr.unit) : false
 		ul.appendChild(li)
-		// console.log(ingr)
 	})
 
 	p.textContent = description.slice(0, 174) + '...'
