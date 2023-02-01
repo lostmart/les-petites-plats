@@ -1,31 +1,35 @@
-import recipeMockData from "./factories/RecipeFactory.js"
-import { createCard } from "./factories/Utils.js"
+import recipeMockData from './factories/RecipeFactory.js'
+import { createCard } from './factories/Utils.js'
 
-const cards_container = document.querySelector("[data-cards-container]")
+// three global variables
+let receipiesArray = [] // data for all the receipies
+
+
+const cards_container = document.querySelector('[data-cards-container]')
 const ingredients_btn = document.querySelector('[data-btn="ingredients"]')
 const appliance_btn = document.querySelector('[data-btn="appliance"]')
 const ustensils_btn = document.querySelector('[data-btn="ustensils"]')
-const rechGeneral = document.querySelector("#Rechercher")
+const rechGeneral = document.querySelector('#Rechercher')
 
 // array of all the receipies
-let receipiesArray = new recipeMockData([
-	"id",
-	"name",
-	"ingredients",
-	"description",
-	"ustensils",
-	"appliance",
+receipiesArray = new recipeMockData([
+	'id',
+	'name',
+	'ingredients',
+	'description',
+	'ustensils',
+	'appliance',
 ])
 
 let { recipes } = receipiesArray
 
 populateDom()
 
-rechGeneral.addEventListener("input", (e) => {
+rechGeneral.addEventListener('input', (e) => {
 	const value = e.target.value.toLowerCase()
 	if (value.length >= 3) {
 		const result = receipiesArray.filterByParameters({
-			type: "name",
+			type: 'name',
 			name: value,
 		})
 		console.log(result)
@@ -33,6 +37,7 @@ rechGeneral.addEventListener("input", (e) => {
 })
 
 function populateDom() {
+	console.log(receipiesArray)
 	recipes.forEach((recipie) => cards_container.append(createCard(recipie)))
 }
 
