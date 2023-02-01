@@ -18,6 +18,11 @@ class RecipeModel {
 		this.time = time ?? null
 		this.ustensils = ustensils ?? null
 	}
+	get ingredientsArray() {
+		let arr = []
+		this.ingredients.forEach((ing) => arr.push(ing.ingredient))
+		return arr
+	}
 }
 
 export default RecipeModel
