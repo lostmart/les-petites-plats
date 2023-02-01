@@ -4,7 +4,10 @@ let utencilesArray = [] // data for all the utelciles
 
 // pushes the ingredients, appliances & utenciles only if it's not already in the list
 const setItems = (recipie, arrayName) => {
-	console.log(arrayName)
+	if (arrayName === 'ingredientsArray') {
+		console.log(recipie, arrayName)
+	}
+	/*
 	recipie.ustensils.forEach((util) => {
 		if (!utencilesArray.includes(util)) {
 			utencilesArray.push(recipie.appliance)
@@ -21,6 +24,7 @@ const setItems = (recipie, arrayName) => {
 		}
 	})
 	return { ingredientsArray, appliancesArray, utencilesArray }
+	*/
 }
 
 export default setItems

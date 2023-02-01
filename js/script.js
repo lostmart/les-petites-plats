@@ -15,11 +15,10 @@ const rechGeneral = document.querySelector('#Rechercher')
 const init = () => {
 	recipes.forEach((rec) => {
 		const newRecipieFromModel = recipeFactory(rec)
-		setItems(rec, 'el amor')
 		populateDom(rec)
 		receipiesArray.push(newRecipieFromModel)
 	})
-	console.log(receipiesArray)
+	//receipiesArray.forEach((rep) => console.log(rep.ingredientsArray))
 }
 
 rechGeneral.addEventListener('input', (e) => {
