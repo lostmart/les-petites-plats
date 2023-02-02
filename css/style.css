@@ -60,7 +60,7 @@
 }
 
 /*    alert     */
-.alert {
+.fiters-containers .alert {
 	width: 170px;
 	max-height: 69px;
 	justify-content: space-between;
@@ -88,7 +88,8 @@
 
 .alert-danger {
 	background-color: var(--red-clr);
-	border-color: var(---red-clr);
+	border-color: var(--red-clr);
+	color: white;
 }
 
 .alert .btn {
@@ -117,4 +118,16 @@ input::-ms-input-placeholder {
 
 input:-ms-input-placeholder {
 	color: white;
+}
+
+/*  error message  */
+.alert-danger {
+	transition: all 500ms ease-in-out;
+}
+
+.no-result {
+	overflow-y: hidden;
+	height: 0;
+	padding: 0;
+	opacity: 0;
 }

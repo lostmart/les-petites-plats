@@ -1,30 +1,36 @@
+/*
+----   this function return an object with three arrays
+----   the data in each array is lowercased and not duplicated
+*/
 let ingredientsArray = [] // data for all the ingredients
-let appliancesArray = [] // data for all the appliances
 let utencilesArray = [] // data for all the utelciles
+let appliancesArray = [] // data for all the appliances
 
 // pushes the ingredients, appliances & utenciles only if it's not already in the list
-const setItems = (recipie, arrayName) => {
+const setItems = (recipData, arrayName) => {
 	if (arrayName === 'ingredientsArray') {
-		console.log(recipie, arrayName)
+		recipData.forEach((ing) => {
+			if (!ingredientsArray.includes(ing.ingredient.trim().toLowerCase())) {
+				ingredientsArray.push(ing.ingredient.trim().toLowerCase())
+			}
+		})
 	}
-	/*
-	recipie.ustensils.forEach((util) => {
-		if (!utencilesArray.includes(util)) {
-			utencilesArray.push(recipie.appliance)
-		}
-	})
-
-	if (!appliancesArray.includes(recipie.appliance)) {
-		appliancesArray.push(recipie.appliance)
+	if (arrayName === 'utensilsArray') {
+		recipData.forEach((util) => {
+			if (!utencilesArray.includes(util.trim().toLowerCase())) {
+				utencilesArray.push(util.trim().toLowerCase())
+			}
+		})
 	}
 
-	recipie.ingredients.forEach((ing) => {
-		if (!ingredientsArray.includes(ing.ingredient)) {
-			ingredientsArray.push(ing.ingredient)
+	if (arrayName === 'applianceArray') {
+		if (!appliancesArray.includes(recipData.trim().toLowerCase())) {
+			appliancesArray.push(recipData.trim().toLowerCase())
 		}
-	})
+	}
+
+	// console.log({ ingredientsArray, appliancesArray, utencilesArray })
 	return { ingredientsArray, appliancesArray, utencilesArray }
-	*/
 }
 
 export default setItems

@@ -13,7 +13,7 @@ class RecipeModel {
 		this.description = description ?? null
 		this.id = id ?? null
 		this.ingredients = ingredients ?? null
-		this.name = name ?? null
+		this.name = name.toLowerCase() ?? null
 		this.servings = servings ?? null
 		this.time = time ?? null
 		this.ustensils = ustensils ?? null

@@ -1,3 +1,6 @@
+/*
+NOT GOOD !!!
+*/
 import RecipeModel from '../classes/RecipeModel.js'
 import { filterDom, filterDomByTags, removeItem } from '../script.js'
 

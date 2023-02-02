@@ -2,15 +2,20 @@ import recipeFactory from './factories/RecipeFactory.js'
 import { createCard } from './factories/Utils.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '../../data/recipes.js'
+import { mainSeacrh } from './factories/Filters.js'
 
-// three global variables
+// GLOBAL variables
 let receipiesArray = [] // data for all the receipies
+let ingredientsArray = [] // data for all the ingredients
+let utencilesArray = [] // data for all the utelciles
+let appliancesArray = [] // data for all the appliances
+let filteredRecipes = [] // data for all filtered recipes  ???????
 
 const cards_container = document.querySelector('[data-cards-container]')
+const rechGeneral = document.querySelector('#Rechercher')
 const ingredients_btn = document.querySelector('[data-btn="ingredients"]')
 const appliance_btn = document.querySelector('[data-btn="appliance"]')
 const ustensils_btn = document.querySelector('[data-btn="ustensils"]')
-const rechGeneral = document.querySelector('#Rechercher')
 
 const init = () => {
 	recipes.forEach((rec) => {
@@ -18,17 +23,21 @@ const init = () => {
 		populateDom(rec)
 		receipiesArray.push(newRecipieFromModel)
 	})
-	//receipiesArray.forEach((rep) => console.log(rep.ingredientsArray))
+	ingredientsArray = setItems().ingredientsArray
+	utencilesArray = setItems().utencilesArray
+	appliancesArray = setItems().appliancesArray
+	// console.log(ingredientsArray)
 }
 
 rechGeneral.addEventListener('input', (e) => {
-	const value = e.target.value.toLowerCase()
-	if (value.length >= 3) {
-		const result = receipiesArray.filterByParameters({
-			type: 'name',
-			name: value,
+	const value = textFormatter(e.target.value.trim())
+	if (value.length > 2) {
+		const result = mainSeacrh(receipiesArray, value)
+		cards_container.textContent = ''
+		result.forEach((recipie) => {
+			cards_container.append(createCard(recipie))
 		})
-		console.log(result)
+
 	}
 })
 
@@ -37,6 +46,14 @@ function populateDom(recipie) {
 }
 
 init()
+
+// returns the unicode form of the string -> NFC "Canonical Decomposition"
+function textFormatter(string) {
+	return string
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+}
 
 /*
 rechGeneral.addEventListener('keydown', (e) => {
