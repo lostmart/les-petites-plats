@@ -11,11 +11,13 @@ let utencilesArray = [] // data for all the utelciles
 let appliancesArray = [] // data for all the appliances
 let filteredRecipes = [] // data for all filtered recipes  ???????
 
+// DOM ELEMENTS
 const cards_container = document.querySelector('[data-cards-container]')
 const rechGeneral = document.querySelector('#Rechercher')
 const ingredients_btn = document.querySelector('[data-btn="ingredients"]')
 const appliance_btn = document.querySelector('[data-btn="appliance"]')
 const ustensils_btn = document.querySelector('[data-btn="ustensils"]')
+const error_msg = document.querySelector('[data-error-msg]')
 
 const init = () => {
 	recipes.forEach((rec) => {
@@ -31,13 +33,31 @@ const init = () => {
 
 rechGeneral.addEventListener('input', (e) => {
 	const value = textFormatter(e.target.value.trim())
+	if (value.length === 0) {
+		error_msg.classList.add('no-result')
+	}
 	if (value.length > 2) {
+		const result = mainSeacrh(receipiesArray, value)
+		cards_container.textContent = ''
+		if (result.length > 1) {
+			result.forEach((recipie) => {
+				cards_container.append(createCard(recipie))
+			})
+		} else {
+			console.log(error_msg)
+			error_msg.classList.remove('no-result')
+		}
+	}
+})
+
+rechGeneral.addEventListener('keydown', (e) => {
+	const value = textFormatter(e.target.value.trim())
+	if (e.key == 'Backspace') {
 		const result = mainSeacrh(receipiesArray, value)
 		cards_container.textContent = ''
 		result.forEach((recipie) => {
 			cards_container.append(createCard(recipie))
 		})
-
 	}
 })
 
@@ -56,12 +76,7 @@ function textFormatter(string) {
 }
 
 /*
-rechGeneral.addEventListener('keydown', (e) => {
-	const value = e.target.value.toLowerCase()
-	if (e.key == 'Backspace') {
-		populateDom(value)
-	}
-})
+
 
 ingredients_btn.addEventListener('click', (e) => {
 	console.log(e.target.parentElement.parentElement)
