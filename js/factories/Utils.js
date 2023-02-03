@@ -78,4 +78,14 @@ export const createListingCards = (data) => {
 // const elements = createListingCards(recipesData)
 //document.querySelector("#").append(domElement);
 
-export const createListingFilters = (data) => {}
+export const createListingFilters = (data) => { }
+
+
+
+// returns the unicode form of the string -> NFC "Canonical Decomposition"
+export function textFormatter(string) {
+	return string
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+}

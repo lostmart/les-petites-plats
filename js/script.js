@@ -1,5 +1,5 @@
 import recipeFactory from './factories/RecipeFactory.js'
-import { createCard } from './factories/Utils.js'
+import { createCard, textFormatter } from './factories/Utils.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '../../data/recipes.js'
 import { mainSeacrh } from './factories/Filters.js'
@@ -12,6 +12,7 @@ let appliancesArray = [] // data for all the appliances
 let filteredRecipes = [] // data for all filtered recipes  ???????
 
 // DOM ELEMENTS
+const form = document.querySelector('form')
 const cards_container = document.querySelector('[data-cards-container]')
 const rechGeneral = document.querySelector('#Rechercher')
 const ingredients_btn = document.querySelector('[data-btn="ingredients"]')
@@ -25,11 +26,15 @@ const init = () => {
 	appliancesArray = setItems().appliancesArray
 	recipes.forEach((rec) => {
 		const newRecipieFromModel = recipeFactory(rec)
+		// console.log(newRecipieFromModel.ingredientsArray)
 		populateDom(rec)
 		receipiesArray.push(newRecipieFromModel)
 	})
-	// console.log(ingredientsArray)
 }
+
+form.addEventListener('submit', (e) => {
+	e.preventDefault()
+})
 
 rechGeneral.addEventListener('input', (e) => {
 	const value = textFormatter(e.target.value.trim())
@@ -53,6 +58,7 @@ rechGeneral.addEventListener('input', (e) => {
 rechGeneral.addEventListener('keydown', (e) => {
 	const value = textFormatter(e.target.value.trim())
 	if (e.key == 'Backspace') {
+		error_msg.classList.add('no-result')
 		const result = mainSeacrh(receipiesArray, value)
 		cards_container.textContent = ''
 		result.forEach((recipie) => {
@@ -74,14 +80,6 @@ function populateDom(recipie) {
 }
 
 init()
-
-// returns the unicode form of the string -> NFC "Canonical Decomposition"
-function textFormatter(string) {
-	return string
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.toLowerCase()
-}
 
 /*
 
