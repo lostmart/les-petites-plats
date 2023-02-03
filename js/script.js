@@ -20,14 +20,14 @@ const ustensils_btn = document.querySelector('[data-btn="ustensils"]')
 const error_msg = document.querySelector('[data-error-msg]')
 
 const init = () => {
+	ingredientsArray = setItems().ingredientsArray
+	utencilesArray = setItems().utencilesArray
+	appliancesArray = setItems().appliancesArray
 	recipes.forEach((rec) => {
 		const newRecipieFromModel = recipeFactory(rec)
 		populateDom(rec)
 		receipiesArray.push(newRecipieFromModel)
 	})
-	ingredientsArray = setItems().ingredientsArray
-	utencilesArray = setItems().utencilesArray
-	appliancesArray = setItems().appliancesArray
 	// console.log(ingredientsArray)
 }
 
@@ -35,6 +35,7 @@ rechGeneral.addEventListener('input', (e) => {
 	const value = textFormatter(e.target.value.trim())
 	if (value.length === 0) {
 		error_msg.classList.add('no-result')
+		receipiesArray.forEach((rec) => populateDom(rec))
 	}
 	if (value.length > 2) {
 		const result = mainSeacrh(receipiesArray, value)
@@ -44,7 +45,6 @@ rechGeneral.addEventListener('input', (e) => {
 				cards_container.append(createCard(recipie))
 			})
 		} else {
-			console.log(error_msg)
 			error_msg.classList.remove('no-result')
 		}
 	}
@@ -59,6 +59,14 @@ rechGeneral.addEventListener('keydown', (e) => {
 			cards_container.append(createCard(recipie))
 		})
 	}
+})
+
+rechGeneral.addEventListener('click', (e) => {
+	const value = textFormatter(e.target.value.trim())
+	if (value.length === 0) {
+		error_msg.classList.add('no-result')
+	}
+	receipiesArray.forEach((rec) => populateDom(rec))
 })
 
 function populateDom(recipie) {
