@@ -26,10 +26,10 @@ const init = () => {
 	appliancesArray = setItems().appliancesArray
 	recipes.forEach((rec) => {
 		const newRecipieFromModel = recipeFactory(rec)
-		// console.log(newRecipieFromModel.ingredientsArray)
 		populateDom(rec)
 		receipiesArray.push(newRecipieFromModel)
 	})
+	// console.log(setItems())
 }
 
 form.addEventListener('submit', (e) => {
@@ -69,10 +69,10 @@ rechGeneral.addEventListener('keydown', (e) => {
 
 rechGeneral.addEventListener('click', (e) => {
 	const value = textFormatter(e.target.value.trim())
-	if (value.length === 0) {
+	if (value === '') {
 		error_msg.classList.add('no-result')
+		receipiesArray.forEach((rec) => populateDom(rec))
 	}
-	receipiesArray.forEach((rec) => populateDom(rec))
 })
 
 function populateDom(recipie) {

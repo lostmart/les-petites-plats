@@ -78,9 +78,31 @@ export const createListingCards = (data) => {
 // const elements = createListingCards(recipesData)
 //document.querySelector("#").append(domElement);
 
-export const createListingFilters = (data) => { }
+export const createListingFilters = (data) => {}
 
+// will return a ul element filled with items with a class "list-group-item"
+export function domLists(elementsArray) {
+	const ul = document.createElement('ul')
+	ul.classList.add('list-group')
+	ul.classList.add('list-group-horizontal')
+	ul.classList.add('flex-wrap')
+	ul.classList.add('justify-content-around')
 
+	elementsArray.forEach((element) => {
+		const li = document.createElement('li')
+		li.classList.add('list-group-item')
+		li.addEventListener('click', (e) => {
+			e.stopPropagation()
+			handleListClick(e.target.textContent)
+			filterDomByTags(e.target.textContent, 'card-ingredients')
+		})
+		li.textContent = element
+		ul.append(li)
+	})
+	return ul
+}
+
+export default domCard
 
 // returns the unicode form of the string -> NFC "Canonical Decomposition"
 export function textFormatter(string) {
