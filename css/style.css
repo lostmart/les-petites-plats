@@ -15,7 +15,7 @@
 /*  form  */
 .input-group .form-control {
 	background-color: #e7e7e7;
-	border-right: none;
+	border: 1px solid transparent;
 }
 
 .input-group .input-group-text {
@@ -23,6 +23,39 @@
 	padding-right: 1em;
 	cursor: pointer;
 	height: 100%;
+}
+
+.input-group .btn-primary {
+	background-color: var(--blue-clr);
+	border-color: var(--blue-clr);
+}
+
+.dropdown {
+	width: 100%;
+	max-width: 667px;
+}
+
+.dropdown .input-group .btn {
+	border-radius: 5px !important;
+	min-width: 172px;
+	padding-top: 0.85em;
+	padding-bottom: 0.85em;
+}
+.dropdown .dropdown-menu {
+	border: 1px solid var(--blue-clr);
+	width: 100%;
+	top: 1.65em;
+}
+
+.dropdown-item {
+	color: white;
+	padding-top: 0.85em;
+	padding-bottom: 0.85em;
+}
+
+.dropdown .form-control {
+	background-color: var(--blue-clr);
+	border-radius: 5px 5px 0 0 !important;
 }
 
 .fiters-containers .list-group-item {

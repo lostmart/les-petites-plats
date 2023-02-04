@@ -75,6 +75,14 @@ rechGeneral.addEventListener('click', (e) => {
 	}
 })
 
+ingredients_btn.addEventListener('click', function (e) {
+	this.classList.add('d-none')
+	document.querySelectorAll('.form-control')[1].classList.remove('d-none')
+	document.querySelector('.dropdown-menu').style.display = 'block'
+	document.querySelector('.dropdown-menu').style.backgroundColor = '#3282f7'
+	//this.parentNode.childNodes[2].style
+})
+
 function populateDom(recipie) {
 	cards_container.append(createCard(recipie))
 }
