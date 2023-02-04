@@ -4,6 +4,10 @@
 	--red-clr: #ed6454;
 }
 
+.container-xl {
+	max-width: 1600px;
+}
+
 .header img {
 	max-width: 268px;
 }
@@ -39,6 +43,7 @@
 	width: 29.35%;
 	margin-bottom: 60px;
 	min-width: 328px;
+	max-width: 380px;
 }
 
 .card .card-body {

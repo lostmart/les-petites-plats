@@ -102,7 +102,7 @@ export function domLists(elementsArray) {
 	return ul
 }
 
-export default domCard
+export default createCard
 
 // returns the unicode form of the string -> NFC "Canonical Decomposition"
 export function textFormatter(string) {
