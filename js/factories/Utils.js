@@ -1,3 +1,5 @@
+import createTags from './TagsFactory.js'
+
 export const createCard = (data) => {
 	const { name, time, description, ingredients } = data
 
@@ -81,25 +83,22 @@ export const createListingCards = (data) => {
 export const createListingFilters = (data) => {}
 
 // will return a ul element filled with items with a class "list-group-item"
-export function domLists(elementsArray) {
-	const ul = document.createElement('ul')
-	ul.classList.add('list-group')
-	ul.classList.add('list-group-horizontal')
-	ul.classList.add('flex-wrap')
-	ul.classList.add('justify-content-around')
-
-	elementsArray.forEach((element) => {
-		const li = document.createElement('li')
-		li.classList.add('list-group-item')
-		li.addEventListener('click', (e) => {
-			e.stopPropagation()
-			handleListClick(e.target.textContent)
-			filterDomByTags(e.target.textContent, 'card-ingredients')
-		})
-		li.textContent = element
-		ul.append(li)
+export function domLists(element) {
+	const li = document.createElement('li')
+	const link = document.createElement('a')
+	link.href = '#'
+	link.classList.add('dropdown-item')
+	link.role = 'button'
+	link.ariaPressed = 'false'
+	link.textContent = element
+	li.append(link)
+	li.classList.add('list-group-item')
+	li.addEventListener('click', function () {
+		createTags()
+		// console.log(this)
 	})
-	return ul
+
+	return li
 }
 
 export default createCard
@@ -110,4 +109,8 @@ export function textFormatter(string) {
 		.normalize('NFD')
 		.replace(/[\u0300-\u036f]/g, '')
 		.toLowerCase()
+}
+
+export function makeCapital(word) {
+	return word.charAt(0).toUpperCase() + word.substr(1)
 }

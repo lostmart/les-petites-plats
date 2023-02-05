@@ -1,5 +1,11 @@
 import recipeFactory from './factories/RecipeFactory.js'
-import { createCard, textFormatter } from './factories/Utils.js'
+import {
+	createCard,
+	domLists,
+	makeCapital,
+	textFormatter,
+} from './factories/Utils.js'
+import createTags from './factories/TagsFactory.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '../../data/recipes.js'
 import { mainSeacrh } from './factories/Filters.js'
@@ -10,6 +16,8 @@ let ingredientsArray = [] // data for all the ingredients
 let utencilesArray = [] // data for all the utelciles
 let appliancesArray = [] // data for all the appliances
 let filteredRecipes = [] // data for all filtered recipes  ???????
+
+let filterTags = [] // array of tags for filtering recipies
 
 // DOM ELEMENTS
 const form = document.querySelector('form')
@@ -79,10 +87,12 @@ ingredients_btn.addEventListener('click', function (e) {
 	this.classList.add('d-none')
 	document.querySelectorAll('.form-control')[1].classList.remove('d-none')
 	document.querySelectorAll('.form-control')[1].focus()
-	document.querySelector('.dropdown-menu').style.display = 'block'
-	document.querySelector('.dropdown-menu').style.backgroundColor = '#3282f7'
+	const ul = document.querySelector('.dropdown-menu')
+	ul.classList.remove('d-none')
+	ul.style.backgroundColor = '#3282f7'
 	ingredientsArray.forEach((elem) => {
-		console.log(elem.charAt(0).toUpperCase() + elem.substr(1))
+		const titleCapital = makeCapital(elem)
+		ul.append(domLists(titleCapital))
 	})
 })
 
@@ -91,19 +101,3 @@ function populateDom(recipie) {
 }
 
 init()
-
-/*
-
-
-ingredients_btn.addEventListener('click', (e) => {
-	console.log(e.target.parentElement.parentElement)
-})
-
-appliance_btn.addEventListener('click', (e) => {
-	console.log(e.target.parentElement.parentElement)
-})
-
-ustensils_btn.addEventListener('click', (e) => {
-	console.log(e.target.parentElement.parentElement)
-})
-*/
