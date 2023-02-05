@@ -4,8 +4,8 @@ import {
 	domLists,
 	makeCapital,
 	textFormatter,
+	tagToDom,
 } from './factories/Utils.js'
-import createTags from './factories/TagsFactory.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '../../data/recipes.js'
 import { mainSeacrh } from './factories/Filters.js'
@@ -27,6 +27,7 @@ const ingredients_btn = document.querySelector('[data-btn="ingredients"]')
 const appliance_btn = document.querySelector('[data-btn="appliance"]')
 const ustensils_btn = document.querySelector('[data-btn="ustensils"]')
 const error_msg = document.querySelector('[data-error-msg]')
+const filters_container = document.querySelector('[data-filters]')
 
 const init = () => {
 	ingredientsArray = setItems().ingredientsArray
@@ -90,11 +91,25 @@ ingredients_btn.addEventListener('click', function (e) {
 	const ul = document.querySelector('.dropdown-menu')
 	ul.classList.remove('d-none')
 	ul.style.backgroundColor = '#3282f7'
-	ingredientsArray.forEach((elem) => {
+	ingredientsArray.forEach((elem, indx) => {
 		const titleCapital = makeCapital(elem)
-		ul.append(domLists(titleCapital))
+		ul.append(domLists(titleCapital, indx))
 	})
 })
+
+// populates filterTags array with new tags selected
+export function createTags(indx) {
+	const selectedItem = ingredientsArray[indx]
+	// checks if it's already in the array
+	if (!filterTags.includes(selectedItem)) {
+		filterTags.push(selectedItem)
+	}
+	filters_container.textContent = ''
+	// adds each value fropm the array to the DOM
+	filterTags.forEach((ingrTag) =>
+		filters_container.append(tagToDom(makeCapital(ingrTag)))
+	)
+}
 
 function populateDom(recipie) {
 	cards_container.append(createCard(recipie))

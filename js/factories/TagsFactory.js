@@ -1,4 +1,7 @@
-export default function createTags() {
-	console.log('ready to run ...')
+/*
+export default function createTags(indx) {
+	console.log(indx)
 	return true
 }
+
+*/

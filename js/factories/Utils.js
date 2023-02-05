@@ -1,4 +1,4 @@
-import createTags from './TagsFactory.js'
+import { createTags } from '../script.js'
 
 export const createCard = (data) => {
 	const { name, time, description, ingredients } = data
@@ -66,24 +66,9 @@ export const createCard = (data) => {
 	return article
 }
 
-export const createFilter = (data) => {
-	// Dom Elements
-}
-
-export const createListingCards = (data) => {
-	let domElement = ''
-	data.forEach((elem) => {
-		domElement += createCard(elem)
-	})
-	return domElement
-}
-// const elements = createListingCards(recipesData)
-//document.querySelector("#").append(domElement);
-
-export const createListingFilters = (data) => {}
-
-// will return a ul element filled with items with a class "list-group-item"
-export function domLists(element) {
+// will return an li element with a class "list-group-item"
+// it sets data-indx attribute to easly track clicks
+export function domLists(element, indx) {
 	const li = document.createElement('li')
 	const link = document.createElement('a')
 	link.href = '#'
@@ -92,16 +77,49 @@ export function domLists(element) {
 	link.ariaPressed = 'false'
 	link.textContent = element
 	li.append(link)
+	li.setAttribute('data-indx', indx)
 	li.classList.add('list-group-item')
+
 	li.addEventListener('click', function () {
-		createTags()
-		// console.log(this)
+		// passes the index of the element clicked
+		createTags(this.getAttribute('data-indx'))
 	})
 
 	return li
 }
 
-export default createCard
+// tags in DOM return a dom element with its tag
+export function tagToDom(elemName) {
+	const classList = [
+		'btn',
+		'badge',
+		'bg-primary',
+		'my-3',
+		'me-3',
+		'px-3',
+		'd-flex',
+		'align-items-center',
+		'gap-3',
+	]
+	const button = document.createElement('button')
+	const span = document.createElement('span')
+	const img = document.createElement('img')
+
+	img.alt = 'close button'
+	img.src = './assets/close-cross.svg'
+
+	span.textContent = elemName
+
+	// add a bucn of classes to the btn element
+	for (let i = 0; i < classList.length; i++) {
+		const newClass = classList[i]
+		button.classList.add(newClass)
+	}
+
+	button.append(span)
+	button.append(img)
+	return button
+}
 
 // returns the unicode form of the string -> NFC "Canonical Decomposition"
 export function textFormatter(string) {
