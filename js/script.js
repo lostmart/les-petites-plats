@@ -20,6 +20,7 @@ let filteredRecipes = [] // data for all filtered recipes  ???????
 let filterTags = [] // array of tags for filtering recipies
 
 // DOM ELEMENTS
+const body = document.querySelector('body')
 const form = document.querySelector('form')
 const cards_container = document.querySelector('[data-cards-container]')
 const rechGeneral = document.querySelector('#Rechercher')
@@ -43,6 +44,13 @@ const init = () => {
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault()
+})
+
+body.addEventListener('click', (e) => {
+	const ul = document.querySelector('.dropdown-menu')
+	document.querySelectorAll('.form-control')[1].classList.toggle('d-none')
+	ul.classList.toggle('d-none')
+	ingredients_btn.classList.toggle('d-none')
 })
 
 rechGeneral.addEventListener('input', (e) => {
@@ -85,12 +93,13 @@ rechGeneral.addEventListener('click', (e) => {
 })
 
 ingredients_btn.addEventListener('click', function (e) {
-	this.classList.add('d-none')
+	e.stopPropagation()
+	this.classList.toggle('d-none')
 	document.querySelectorAll('.form-control')[1].classList.remove('d-none')
 	document.querySelectorAll('.form-control')[1].focus()
 	const ul = document.querySelector('.dropdown-menu')
-	ul.classList.remove('d-none')
-	ul.style.backgroundColor = '#3282f7'
+	toggleShow(ul)
+
 	ingredientsArray.forEach((elem, indx) => {
 		const titleCapital = makeCapital(elem)
 		ul.append(domLists(titleCapital, indx))
@@ -113,6 +122,11 @@ export function createTags(indx) {
 
 function populateDom(recipie) {
 	cards_container.append(createCard(recipie))
+}
+
+function toggleShow(elem) {
+	elem.classList.toggle('d-none')
+	elem.style.backgroundColor = '#3282f7'
 }
 
 init()

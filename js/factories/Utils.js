@@ -80,8 +80,9 @@ export function domLists(element, indx) {
 	li.setAttribute('data-indx', indx)
 	li.classList.add('list-group-item')
 
-	li.addEventListener('click', function () {
+	li.addEventListener('click', function (e) {
 		// passes the index of the element clicked
+		e.stopPropagation()
 		createTags(this.getAttribute('data-indx'))
 	})
 
@@ -118,6 +119,12 @@ export function tagToDom(elemName) {
 
 	button.append(span)
 	button.append(img)
+
+	button.addEventListener('click', function (e) {
+		console.log(this)
+		e.stopPropagation()
+	})
+
 	return button
 }
 
