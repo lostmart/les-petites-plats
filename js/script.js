@@ -16,6 +16,7 @@ let ingredientsArray = [] // data for all the ingredients
 let utencilesArray = [] // data for all the utelciles
 let appliancesArray = [] // data for all the appliances
 let filteredRecipes = [] // data for all filtered recipes  ???????
+let openChart = false
 
 let filterTags = [] // array of tags for filtering recipies
 
@@ -46,11 +47,14 @@ form.addEventListener('submit', (e) => {
 	e.preventDefault()
 })
 
-body.addEventListener('click', (e) => {
-	const ul = document.querySelector('.dropdown-menu')
-	document.querySelectorAll('.form-control')[1].classList.toggle('d-none')
-	ul.classList.toggle('d-none')
-	ingredients_btn.classList.toggle('d-none')
+body.addEventListener('click', function (e) {
+	if (openChart) {
+		const ul = document.querySelector('.dropdown-menu')
+		document.querySelectorAll('.form-control')[1].classList.toggle('d-none')
+		ul.classList.toggle('d-none')
+		ingredients_btn.classList.toggle('d-none')
+		openChart = false
+	}
 })
 
 rechGeneral.addEventListener('input', (e) => {
@@ -94,16 +98,18 @@ rechGeneral.addEventListener('click', (e) => {
 
 ingredients_btn.addEventListener('click', function (e) {
 	e.stopPropagation()
-	this.classList.toggle('d-none')
-	document.querySelectorAll('.form-control')[1].classList.remove('d-none')
-	document.querySelectorAll('.form-control')[1].focus()
-	const ul = document.querySelector('.dropdown-menu')
-	toggleShow(ul)
-
-	ingredientsArray.forEach((elem, indx) => {
-		const titleCapital = makeCapital(elem)
-		ul.append(domLists(titleCapital, indx))
-	})
+	if (!openChart) {
+		this.classList.toggle('d-none')
+		document.querySelectorAll('.form-control')[1].classList.remove('d-none')
+		document.querySelectorAll('.form-control')[1].focus()
+		const ul = document.querySelector('.dropdown-menu')
+		toggleShow(ul)
+		openChart = true
+		ingredientsArray.forEach((elem, indx) => {
+			const titleCapital = makeCapital(elem)
+			ul.append(domLists(titleCapital, indx))
+		})
+	}
 })
 
 // populates filterTags array with new tags selected
@@ -113,6 +119,17 @@ export function createTags(indx) {
 	if (!filterTags.includes(selectedItem)) {
 		filterTags.push(selectedItem)
 	}
+	filters_container.textContent = ''
+	// adds each value fropm the array to the DOM
+	filterTags.forEach((ingrTag) =>
+		filters_container.append(tagToDom(makeCapital(ingrTag)))
+	)
+}
+
+export function removeTag(elemName) {
+	elemName = elemName.toLowerCase()
+	let filteredTagsNoSelectedElem = filterTags.filter((elem) => elem != elemName)
+	filterTags = filteredTagsNoSelectedElem
 	filters_container.textContent = ''
 	// adds each value fropm the array to the DOM
 	filterTags.forEach((ingrTag) =>

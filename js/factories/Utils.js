@@ -1,4 +1,4 @@
-import { createTags } from '../script.js'
+import { createTags, removeTag } from '../script.js'
 
 export const createCard = (data) => {
 	const { name, time, description, ingredients } = data
@@ -121,7 +121,7 @@ export function tagToDom(elemName) {
 	button.append(img)
 
 	button.addEventListener('click', function (e) {
-		console.log(this)
+		removeTag(this.textContent)
 		e.stopPropagation()
 	})
 
