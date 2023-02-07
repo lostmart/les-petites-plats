@@ -30,6 +30,16 @@
 	border-color: var(--blue-clr);
 }
 
+.input-group .btn-success {
+	background-color: var(--green-clr);
+	border-color: var(--green-clr);
+}
+
+.input-group .btn-danger {
+	background-color: var(--red-clr);
+	border-color: var(--red-clr);
+}
+
 .dropdown {
 	width: 100%;
 	max-width: 667px;

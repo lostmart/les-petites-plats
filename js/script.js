@@ -135,6 +135,7 @@ export function removeTag(elemName) {
 	filterTags.forEach((ingrTag) =>
 		filters_container.append(tagToDom(makeCapital(ingrTag)))
 	)
+	console.log(filterTags)
 }
 
 function populateDom(recipie) {
