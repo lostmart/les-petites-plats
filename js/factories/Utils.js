@@ -68,7 +68,8 @@ export const createCard = (data) => {
 
 // will return an li element with a class "list-group-item"
 // it sets data-indx attribute to easly track clicks
-export function domLists(element, indx) {
+// last arg: arrayName ( ingredients, appareils or ustensils )
+export function domLists(element, indx, arrayName) {
 	const li = document.createElement('li')
 	const link = document.createElement('a')
 	link.href = '#'
@@ -78,19 +79,26 @@ export function domLists(element, indx) {
 	link.textContent = element
 	li.append(link)
 	li.setAttribute('data-indx', indx)
+	li.setAttribute('data-array', '')
 	li.classList.add('list-group-item')
 
-	li.addEventListener('click', function (e) {
-		// passes the index of the element clicked
-		e.stopPropagation()
-		createTags(this.getAttribute('data-indx'))
-	})
+	li.addEventListener(
+		'click',
+		function (e) {
+			// passes the index of the element clicked
+			e.stopPropagation()
+			// pass arrayName to know which tag to add
+			createTags(this.getAttribute('data-indx'), arrayName)
+		},
+		true
+	)
 
 	return li
 }
 
 // tags in DOM return a dom element with its tag
-export function tagToDom(elemName) {
+export function tagToDom(elemName, arrayName) {
+	console.log(arrayName)
 	const classList = [
 		'btn',
 		'badge',

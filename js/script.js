@@ -13,8 +13,8 @@ import { mainSeacrh } from './factories/Filters.js'
 // GLOBAL variables
 let receipiesArray = [] // data for all the receipies
 let ingredientsArray = [] // data for all the ingredients
-let utencilesArray = [] // data for all the utelciles
 let appliancesArray = [] // data for all the appliances
+let utencilesArray = [] // data for all the utelciles
 let filteredRecipes = [] // data for all filtered recipes  ???????
 let openChart = null
 
@@ -51,13 +51,28 @@ form.addEventListener('submit', (e) => {
 
 body.addEventListener('click', function (e) {
 	if (openChart === 'ingredients') {
-		const ul = document.querySelector('.dropdown-menu')
+		console.log('body click')
 		document.querySelectorAll('.form-control')[1].classList.toggle('d-none')
-		ul.classList.toggle('d-none')
-		ul.textContent = ''
 		ingredients_btn.classList.toggle('d-none')
-		openChart = false
+		openChart = null
 	}
+	if (openChart === 'appliance') {
+		document.querySelectorAll('.form-control')[2].classList.toggle('d-none')
+		console.log('body click')
+		appliance_btn.classList.toggle('d-none')
+		ul.style.left = '0'
+		openChart = null
+	}
+
+	if (openChart === 'ustensils') {
+		document.querySelectorAll('.form-control')[3].classList.toggle('d-none')
+		ustensils_btn.classList.toggle('d-none')
+		ul.style.left = '0'
+		openChart = null
+	}
+
+	ul.classList.add('d-none')
+	ul.textContent = ''
 })
 
 rechGeneral.addEventListener('input', (e) => {
@@ -113,7 +128,8 @@ ingredients_btn.addEventListener('click', function (e) {
 
 		ingredientsArray.forEach((elem, indx) => {
 			const titleCapital = makeCapital(elem)
-			ul.append(domLists(titleCapital, indx))
+			// title / index / arrayName
+			ul.append(domLists(titleCapital, indx, 'ingredients_array'))
 		})
 	}
 })
@@ -129,16 +145,16 @@ appliance_btn.addEventListener('click', function (e) {
 
 		toggleShow(ul)
 		ul.style.backgroundColor = '#68d9a4'
-		ul.style.borderColor = '#68d9a4'
-		ul.style.left = '180px'
+		ul.style.borderColor = 'transparent'
+		ul.style.left = '204px'
 		openChart = 'appliance'
 
 		appliancesArray.forEach((elem, indx) => {
 			const titleCapital = makeCapital(elem)
-			ul.append(domLists(titleCapital, indx))
+			// title / index / arrayName
+			ul.append(domLists(titleCapital, indx, 'appliance_array'))
 		})
 	}
-	console.log(this)
 })
 
 /* ustensils  click  */
@@ -146,15 +162,29 @@ ustensils_btn.addEventListener('click', function (e) {
 	e.stopPropagation()
 	if (!openChart) {
 		this.classList.toggle('d-none')
+
+		document.querySelectorAll('.form-control')[3].classList.remove('d-none')
+		document.querySelectorAll('.form-control')[3].focus()
+		openChart = 'ustensils'
+
+		toggleShow(ul)
+		ul.style.backgroundColor = '#ed6454'
+		ul.style.borderColor = 'transparent'
+		ul.style.left = '401px'
+		openChart = 'ustensils'
+
+		utencilesArray.forEach((elem, indx) => {
+			const titleCapital = makeCapital(elem)
+			// title / index / arrayName
+			ul.append(domLists(titleCapital, indx, 'ustensils_array'))
+		})
 	}
-
-	openChart = 'ustensils'
-
-	console.log(this)
 })
 
 // populates filterTags array with new tags selected
-export function createTags(indx) {
+// arrayName  ( ingredients, appareils or ustensils )
+export function createTags(indx, arrayName) {
+	// ingredients
 	const selectedItem = ingredientsArray[indx]
 	// checks if it's already in the array
 	if (!filterTags.includes(selectedItem)) {
@@ -163,7 +193,7 @@ export function createTags(indx) {
 	filters_container.textContent = ''
 	// adds each value fropm the array to the DOM
 	filterTags.forEach((ingrTag) =>
-		filters_container.append(tagToDom(makeCapital(ingrTag)))
+		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
 	)
 }
 
@@ -174,7 +204,7 @@ export function removeTag(elemName) {
 	filters_container.textContent = ''
 	// adds each value fropm the array to the DOM
 	filterTags.forEach((ingrTag) =>
-		filters_container.append(tagToDom(makeCapital(ingrTag)))
+		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
 	)
 	console.log(filterTags)
 }

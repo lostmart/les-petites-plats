@@ -51,11 +51,11 @@
 	padding-bottom: 0.85em;
 }
 .dropdown .dropdown-menu {
-	border: 1px solid var(--blue-clr);
+	border: 1px solid transparent;
 	padding-top: 1.4em;
 	width: 100%;
 	top: 2.95em;
-	max-width: 666px;
+	max-width: 667px;
 	max-height: 390px;
 	overflow-y: auto;
 	-ms-overflow-style: none;
