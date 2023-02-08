@@ -16,7 +16,7 @@ let ingredientsArray = [] // data for all the ingredients
 let utencilesArray = [] // data for all the utelciles
 let appliancesArray = [] // data for all the appliances
 let filteredRecipes = [] // data for all filtered recipes  ???????
-let openChart = false
+let openChart = null
 
 let filterTags = [] // array of tags for filtering recipies
 
@@ -26,10 +26,12 @@ const form = document.querySelector('form')
 const cards_container = document.querySelector('[data-cards-container]')
 const rechGeneral = document.querySelector('#Rechercher')
 const ingredients_btn = document.querySelector('[data-btn="ingredients"]')
-const appliance_btn = document.querySelector('[data-btn="appliance"]')
-const ustensils_btn = document.querySelector('[data-btn="ustensils"]')
+const appliance_btn = document.querySelector('[data-btn="appareils"]')
+const ustensils_btn = document.querySelector('[data-btn="ustensiles"]')
 const error_msg = document.querySelector('[data-error-msg]')
 const filters_container = document.querySelector('[data-filters]')
+
+const ul = document.querySelector('.dropdown-menu')
 
 const init = () => {
 	ingredientsArray = setItems().ingredientsArray
@@ -48,10 +50,11 @@ form.addEventListener('submit', (e) => {
 })
 
 body.addEventListener('click', function (e) {
-	if (openChart) {
+	if (openChart === 'ingredients') {
 		const ul = document.querySelector('.dropdown-menu')
 		document.querySelectorAll('.form-control')[1].classList.toggle('d-none')
 		ul.classList.toggle('d-none')
+		ul.textContent = ''
 		ingredients_btn.classList.toggle('d-none')
 		openChart = false
 	}
@@ -96,20 +99,58 @@ rechGeneral.addEventListener('click', (e) => {
 	}
 })
 
+/*  ingredients listeners   */
 ingredients_btn.addEventListener('click', function (e) {
 	e.stopPropagation()
 	if (!openChart) {
 		this.classList.toggle('d-none')
+
 		document.querySelectorAll('.form-control')[1].classList.remove('d-none')
 		document.querySelectorAll('.form-control')[1].focus()
-		const ul = document.querySelector('.dropdown-menu')
+
 		toggleShow(ul)
-		openChart = true
+		openChart = 'ingredients'
+
 		ingredientsArray.forEach((elem, indx) => {
 			const titleCapital = makeCapital(elem)
 			ul.append(domLists(titleCapital, indx))
 		})
 	}
+})
+
+/* appareils click  */
+appliance_btn.addEventListener('click', function (e) {
+	e.stopPropagation()
+	if (!openChart) {
+		this.classList.toggle('d-none')
+
+		document.querySelectorAll('.form-control')[2].classList.remove('d-none')
+		document.querySelectorAll('.form-control')[2].focus()
+
+		toggleShow(ul)
+		ul.style.backgroundColor = '#68d9a4'
+		ul.style.borderColor = '#68d9a4'
+		ul.style.left = '180px'
+		openChart = 'appliance'
+
+		appliancesArray.forEach((elem, indx) => {
+			const titleCapital = makeCapital(elem)
+			ul.append(domLists(titleCapital, indx))
+		})
+	}
+	console.log(this)
+})
+
+/* ustensils  click  */
+ustensils_btn.addEventListener('click', function (e) {
+	e.stopPropagation()
+	if (!openChart) {
+		this.classList.toggle('d-none')
+	}
+
+	openChart = 'ustensils'
+
+	console.log(this)
 })
 
 // populates filterTags array with new tags selected
