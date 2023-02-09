@@ -11,3 +11,8 @@ export const mainSeacrh = (receipies, value) => {
 			recipie.ingredientsArray.some(ingredientTest)
 	)
 }
+
+export const inputsfilter = (array, value) => {
+	const result = array.filter((word) => word.includes(value))
+	return result
+}

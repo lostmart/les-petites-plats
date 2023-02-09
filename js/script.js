@@ -8,7 +8,7 @@ import {
 } from './factories/Utils.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '../../data/recipes.js'
-import { mainSeacrh } from './factories/Filters.js'
+import { mainSeacrh, inputsfilter } from './factories/Filters.js'
 
 // GLOBAL variables
 let receipiesArray = [] // data for all the receipies
@@ -19,6 +19,7 @@ let filteredRecipes = [] // data for all filtered recipes  ???????
 let openChart = null
 
 let filterTags = [] // array of tags for filtering recipies
+let inpuFilteredTags = [] // array of tags filtered using the inputs (ingredients / appareils / ustensiles)
 
 // DOM ELEMENTS
 const body = document.querySelector('body')
@@ -30,6 +31,7 @@ const appliance_btn = document.querySelector('[data-btn="appareils"]')
 const ustensils_btn = document.querySelector('[data-btn="ustensiles"]')
 const error_msg = document.querySelector('[data-error-msg]')
 const filters_container = document.querySelector('[data-filters]')
+const inputsNodes = document.querySelectorAll('input[type=text]')
 
 const ul = document.querySelector('.dropdown-menu')
 
@@ -55,13 +57,14 @@ body.addEventListener('click', function (e) {
 		document.querySelectorAll('.form-control')[1].classList.toggle('d-none')
 		ingredients_btn.classList.toggle('d-none')
 		openChart = null
+		inputsNodes[0].value = ''
 	}
 	if (openChart === 'appliance') {
 		document.querySelectorAll('.form-control')[2].classList.toggle('d-none')
-		console.log('body click')
 		appliance_btn.classList.toggle('d-none')
 		ul.style.left = '0'
 		openChart = null
+		inputsNodes[1].value = ''
 	}
 
 	if (openChart === 'ustensils') {
@@ -69,6 +72,7 @@ body.addEventListener('click', function (e) {
 		ustensils_btn.classList.toggle('d-none')
 		ul.style.left = '0'
 		openChart = null
+		inputsNodes[2].value = ''
 	}
 
 	ul.classList.add('d-none')
@@ -181,24 +185,88 @@ ustensils_btn.addEventListener('click', function (e) {
 	}
 })
 
+// ingredients / apareils / ustensiles input search
+inputsNodes.forEach((input) =>
+	input.addEventListener('input', function (e) {
+		const value = textFormatter(e.currentTarget.value)
+		const arrayFilter = e.currentTarget.getAttribute('aria-label')
+		if (value != '' && arrayFilter === 'Ingredients search input') {
+			ul.textContent = ''
+			// ingredients filter & populates DOM after
+			inputsfilter(ingredientsArray, value).forEach((elem, indx) => {
+				const itemCapicat = makeCapital(elem)
+				// title / index / arrayName
+				ul.append(domLists(itemCapicat, indx, 'ingredients_array'))
+			})
+		} else if (value != '' && arrayFilter === 'Appareils search input') {
+			ul.textContent = ''
+			// applicance filter
+			inputsfilter(appliancesArray, value).forEach((elem, indx) => {
+				const itemCapicat = makeCapital(elem)
+				// title / index / arrayName
+				ul.append(domLists(itemCapicat, indx, 'appliance_array'))
+			})
+		} else if (value != '' && arrayFilter === 'Ustensiles search input') {
+			ul.textContent = ''
+			// ustensiles filter
+			inputsfilter(utencilesArray, value).forEach((elem, indx) => {
+				const itemCapicat = makeCapital(elem)
+				// title / index / arrayName
+				ul.append(domLists(itemCapicat, indx, 'ustensils_array'))
+			})
+		}
+		// empty
+		else {
+			// repopulate the ul thing based on which input was clicked ( ingredients / apareils / ustensiles)
+			if (arrayFilter === 'Ingredients search input') {
+				ingredientsArray.forEach((elem, indx) => {
+					const titleCapital = makeCapital(elem)
+					// title / index / arrayName
+					ul.append(domLists(titleCapital, indx, 'ingredients_array'))
+				})
+			}
+			if (arrayFilter === 'Appareils search input') {
+				appliancesArray.forEach((elem, indx) => {
+					const titleCapital = makeCapital(elem)
+					// title / index / arrayName
+					ul.append(domLists(titleCapital, indx, 'appliance_array'))
+				})
+			}
+			if (arrayFilter === 'Ustensiles search input') {
+				utencilesArray.forEach((elem, indx) => {
+					const titleCapital = makeCapital(elem)
+					// title / index / arrayName
+					ul.append(domLists(titleCapital, indx, 'ustensils_array'))
+				})
+			}
+		}
+	})
+)
+
+/*  GENERAL FUNCTIONS   */
+
 // populates filterTags array with new tags selected
 // arrayName  ( ingredients, appareils or ustensils )
-export function createTags(indx, arrayName) {
+export function createTags(indx, arrayName, elementName) {
 	let selectedItem = null
-	console.log(arrayName)
 	// check which array we need to add
 	if (arrayName === 'ingredients_array') {
 		// ingredients
-		selectedItem = ingredientsArray[indx]
+		const dynamiIndx = ingredientsArray.indexOf(elementName)
+		// console.log(dynamiIndx)
+		selectedItem = ingredientsArray[dynamiIndx]
 	}
 	if (arrayName === 'appliance_array') {
+		const dynamiIndx = appliancesArray.indexOf(elementName)
+
 		// appliances
-		selectedItem = appliancesArray[indx]
+		selectedItem = appliancesArray[dynamiIndx]
 	}
 	//ustensils
 	if (arrayName === 'ustensils_array') {
+		const dynamiIndx = utencilesArray.indexOf(elementName)
 		// appliances
-		selectedItem = utencilesArray[indx]
+		selectedItem = utencilesArray[dynamiIndx]
 	}
 	// checks if it's already in the array
 	if (!filterTags.includes(selectedItem)) {
@@ -220,7 +288,7 @@ export function removeTag(elemName, arrayName) {
 	filterTags.forEach((ingrTag) =>
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
 	)
-	console.log(filterTags)
+	// console.log(filterTags)
 }
 
 function populateDom(recipie) {

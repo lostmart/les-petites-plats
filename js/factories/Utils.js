@@ -87,8 +87,9 @@ export function domLists(element, indx, arrayName) {
 		function (e) {
 			// passes the index of the element clicked
 			e.stopPropagation()
+			const elementName = this.textContent.toLocaleLowerCase()
 			// pass arrayName to know which tag to add
-			createTags(this.getAttribute('data-indx'), arrayName)
+			createTags(this.getAttribute('data-indx'), arrayName, elementName)
 		},
 		true
 	)
@@ -98,7 +99,6 @@ export function domLists(element, indx, arrayName) {
 
 // tags in DOM return a dom element with its tag
 export function tagToDom(elemName, arrayName) {
-	console.log(arrayName)
 	const classList = [
 		'btn',
 		'badge',
@@ -142,6 +142,7 @@ export function textFormatter(string) {
 		.normalize('NFD')
 		.replace(/[\u0300-\u036f]/g, '')
 		.toLowerCase()
+		.trim()
 }
 
 export function makeCapital(word) {
