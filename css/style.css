@@ -96,7 +96,7 @@
 }
 
 .dropdown-item:hover {
-	background-color: #2c74dd;
+	background-color: #15171a65;
 	font-weight: bold;
 	color: white;
 	border-color: transparent;
@@ -106,7 +106,7 @@
 
 .dropdown-item:focus {
 	color: white;
-	background-color: #2c74dd;
+	background-color: #15171a65;
 }
 
 .fiters-containers .list-group-item {

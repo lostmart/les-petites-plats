@@ -129,7 +129,7 @@ export function tagToDom(elemName, arrayName) {
 	button.append(img)
 
 	button.addEventListener('click', function (e) {
-		removeTag(this.textContent)
+		removeTag(this.textContent, arrayName)
 		e.stopPropagation()
 	})
 

@@ -184,8 +184,22 @@ ustensils_btn.addEventListener('click', function (e) {
 // populates filterTags array with new tags selected
 // arrayName  ( ingredients, appareils or ustensils )
 export function createTags(indx, arrayName) {
-	// ingredients
-	const selectedItem = ingredientsArray[indx]
+	let selectedItem = null
+	console.log(arrayName)
+	// check which array we need to add
+	if (arrayName === 'ingredients_array') {
+		// ingredients
+		selectedItem = ingredientsArray[indx]
+	}
+	if (arrayName === 'appliance_array') {
+		// appliances
+		selectedItem = appliancesArray[indx]
+	}
+	//ustensils
+	if (arrayName === 'ustensils_array') {
+		// appliances
+		selectedItem = utencilesArray[indx]
+	}
 	// checks if it's already in the array
 	if (!filterTags.includes(selectedItem)) {
 		filterTags.push(selectedItem)
@@ -197,7 +211,7 @@ export function createTags(indx, arrayName) {
 	)
 }
 
-export function removeTag(elemName) {
+export function removeTag(elemName, arrayName) {
 	elemName = elemName.toLowerCase()
 	let filteredTagsNoSelectedElem = filterTags.filter((elem) => elem != elemName)
 	filterTags = filteredTagsNoSelectedElem
