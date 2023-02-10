@@ -1,3 +1,4 @@
+/*
 class RecipeViewModel {
 	constructor(recipe) {
 		this.name = recipe?.name ?? ''
@@ -7,3 +8,5 @@ class RecipeViewModel {
 }
 
 export default RecipeViewModel
+
+*/

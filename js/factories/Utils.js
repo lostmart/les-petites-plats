@@ -82,17 +82,13 @@ export function domLists(element, indx, arrayName) {
 	li.setAttribute('data-array', '')
 	li.classList.add('list-group-item')
 
-	li.addEventListener(
-		'click',
-		function (e) {
-			// passes the index of the element clicked
-			e.stopPropagation()
-			const elementName = this.textContent.toLocaleLowerCase()
-			// pass arrayName to know which tag to add
-			createTags(this.getAttribute('data-indx'), arrayName, elementName)
-		},
-		true
-	)
+	li.addEventListener('click', function (e) {
+		// passes the index of the element clicked
+		e.stopPropagation()
+		const elementName = this.textContent.toLocaleLowerCase()
+		// pass arrayName to know which tag to add
+		createTags(this.getAttribute('data-indx'), arrayName, elementName)
+	})
 
 	return li
 }

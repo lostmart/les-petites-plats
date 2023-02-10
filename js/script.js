@@ -39,6 +39,7 @@ const init = () => {
 	ingredientsArray = setItems().ingredientsArray
 	utencilesArray = setItems().utencilesArray
 	appliancesArray = setItems().appliancesArray
+
 	recipes.forEach((rec) => {
 		const newRecipieFromModel = recipeFactory(rec)
 		populateDom(rec)
@@ -111,6 +112,7 @@ rechGeneral.addEventListener('keydown', (e) => {
 })
 
 rechGeneral.addEventListener('click', (e) => {
+	console.log('lechiga ...')
 	const value = textFormatter(e.target.value.trim())
 	if (value === '') {
 		error_msg.classList.add('no-result')
@@ -277,6 +279,7 @@ export function createTags(indx, arrayName, elementName) {
 	filterTags.forEach((ingrTag) =>
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
 	)
+	console.log(filterTags)
 }
 
 export function removeTag(elemName, arrayName) {
@@ -288,7 +291,7 @@ export function removeTag(elemName, arrayName) {
 	filterTags.forEach((ingrTag) =>
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
 	)
-	// console.log(filterTags)
+	console.log(filterTags)
 }
 
 function populateDom(recipie) {
