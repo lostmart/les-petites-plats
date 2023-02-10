@@ -16,3 +16,17 @@ export const inputsfilter = (array, value) => {
 	const result = array.filter((word) => word.includes(value))
 	return result
 }
+
+// no se che ...
+export function filterByTags(receipies, ingrTag) {
+	const ingredientTest = (ingredient) => {
+		textFormatter(ingredient) === textFormatter(ingrTag)
+	}
+
+	return receipies.filter(
+		(recipie) => {
+			return recipie.appliance.toLowerCase() === ingrTag.toLowerCase()
+		}
+		// return recipie.ingredientsArray.some(ingredientTest)
+	)
+}

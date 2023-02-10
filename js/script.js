@@ -8,7 +8,7 @@ import {
 } from './factories/Utils.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '../../data/recipes.js'
-import { mainSeacrh, inputsfilter } from './factories/Filters.js'
+import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
 
 // GLOBAL variables
 let receipiesArray = [] // data for all the receipies
@@ -250,6 +250,8 @@ inputsNodes.forEach((input) =>
 // populates filterTags array with new tags selected
 // arrayName  ( ingredients, appareils or ustensils )
 export function createTags(indx, arrayName, elementName) {
+	cards_container.textContent = ''
+	filters_container.textContent = ''
 	let selectedItem = null
 	// check which array we need to add
 	if (arrayName === 'ingredients_array') {
@@ -274,12 +276,13 @@ export function createTags(indx, arrayName, elementName) {
 	if (!filterTags.includes(selectedItem)) {
 		filterTags.push(selectedItem)
 	}
-	filters_container.textContent = ''
+
 	// adds each value fropm the array to the DOM
-	filterTags.forEach((ingrTag) =>
+	filterTags.forEach((ingrTag) => {
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
-	)
-	console.log(filterTags)
+		const result = filterByTags(receipiesArray, ingrTag)
+		result.forEach((recipie) => populateDom(recipie))
+	})
 }
 
 export function removeTag(elemName, arrayName) {
@@ -288,10 +291,10 @@ export function removeTag(elemName, arrayName) {
 	filterTags = filteredTagsNoSelectedElem
 	filters_container.textContent = ''
 	// adds each value fropm the array to the DOM
-	filterTags.forEach((ingrTag) =>
+	filterTags.forEach((ingrTag) => {
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
-	)
-	console.log(filterTags)
+		filterByTags(receipiesArray, ingrTag)
+	})
 }
 
 function populateDom(recipie) {
