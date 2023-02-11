@@ -1,3 +1,4 @@
+import { textFormatter } from '../factories/Utils.js'
 class RecipeModel {
 	constructor({
 		appliance,
@@ -20,7 +21,7 @@ class RecipeModel {
 	}
 	get ingredientsArray() {
 		let arr = []
-		this.ingredients.forEach((ing) => arr.push(ing.ingredient))
+		this.ingredients.forEach((ing) => arr.push(textFormatter(ing.ingredient)))
 		return arr
 	}
 }

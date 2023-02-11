@@ -7,7 +7,7 @@ import {
 	tagToDom,
 } from './factories/Utils.js'
 import setItems from './factories/DataArrays.js'
-import { recipes } from '../../data/recipes.js'
+import { recipes } from '/data/recipes.js'
 import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
 
 // GLOBAL variables

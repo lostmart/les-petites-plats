@@ -1,4 +1,4 @@
-import { textFormatter } from './Utils.js'
+import { textFormatter, makeCapital } from './Utils.js'
 // returns the result of the main search (name || description || ingredients)
 export const mainSeacrh = (receipies, value) => {
 	const ingredientTest = (ingredient) => {
@@ -25,10 +25,18 @@ export function filterByTags(receipies, elemTag) {
 
 	return receipies.filter(
 		(recipie) => {
-			const includes = recipie.ustensils.includes(elemTag)
+			const includes = recipie.ingredientsArray.includes(makeCapital(elemTag))
+			// recipie.ingredientsArray.forEach((rec) => {
+			// 	// console.log(textFormatter(rec), textFormatter(elemTag))
+			// 	if (textFormatter(rec) === textFormatter(elemTag)) {
+			// 		console.log('encontrado !')
+			// 	}
+			// })
+			//console.log(makeCapital(elemTag))
 			const result =
 				textFormatter(recipie.appliance) === textFormatter(elemTag) ||
-				recipie.ustensils.includes(elemTag)
+				recipie.ustensils.includes(elemTag) ||
+				recipie.ingredientsArray.includes(elemTag)
 			return result
 		}
 		// return recipie.ingredientsArray.some(ingredientTest)
