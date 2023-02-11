@@ -15,7 +15,7 @@ let receipiesArray = [] // data for all the receipies
 let ingredientsArray = [] // data for all the ingredients
 let appliancesArray = [] // data for all the appliances
 let utencilesArray = [] // data for all the utelciles
-let filteredRecipes = [] // data for all filtered recipes  ???????
+let filteredRecipes = [] // data for all filtered recipes ( necessary for complex researches, with one than more param )
 let openChart = null
 
 let filterTags = [] // array of tags for filtering recipies
@@ -40,6 +40,7 @@ const init = () => {
 	utencilesArray = setItems().utencilesArray
 	appliancesArray = setItems().appliancesArray
 
+	// only time DOM population without filters
 	recipes.forEach((rec) => {
 		const newRecipieFromModel = recipeFactory(rec)
 		populateDom(rec)
@@ -80,6 +81,7 @@ body.addEventListener('click', function (e) {
 	ul.textContent = ''
 })
 
+// big general search
 rechGeneral.addEventListener('input', (e) => {
 	const value = textFormatter(e.target.value.trim())
 	if (value.length === 0) {
@@ -90,7 +92,8 @@ rechGeneral.addEventListener('input', (e) => {
 		const result = mainSeacrh(receipiesArray, value)
 		cards_container.textContent = ''
 		if (result.length > 1) {
-			result.forEach((recipie) => {
+			filteredRecipes = result
+			filteredRecipes.forEach((recipie) => {
 				cards_container.append(createCard(recipie))
 			})
 		} else {
@@ -99,20 +102,21 @@ rechGeneral.addEventListener('input', (e) => {
 	}
 })
 
+// general search (backspace)
 rechGeneral.addEventListener('keydown', (e) => {
 	const value = textFormatter(e.target.value.trim())
 	if (e.key == 'Backspace') {
 		error_msg.classList.add('no-result')
-		const result = mainSeacrh(receipiesArray, value)
+		filteredRecipes = mainSeacrh(receipiesArray, value)
 		cards_container.textContent = ''
-		result.forEach((recipie) => {
+		filteredRecipes.forEach((recipie) => {
 			cards_container.append(createCard(recipie))
 		})
 	}
 })
 
+// clear search input
 rechGeneral.addEventListener('click', (e) => {
-	console.log('lechiga ...')
 	const value = textFormatter(e.target.value.trim())
 	if (value === '') {
 		error_msg.classList.add('no-result')
@@ -277,11 +281,11 @@ export function createTags(indx, arrayName, elementName) {
 		filterTags.push(selectedItem)
 	}
 
-	// adds each value fropm the array to the DOM
+	// adds each value from the array to the DOM
 	filterTags.forEach((ingrTag) => {
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
-		const result = filterByTags(receipiesArray, ingrTag)
-		result.forEach((recipie) => populateDom(recipie))
+		filteredRecipes = filterByTags(receipiesArray, ingrTag)
+		filteredRecipes.forEach((recipie) => populateDom(recipie))
 	})
 }
 
@@ -293,8 +297,23 @@ export function removeTag(elemName, arrayName) {
 	// adds each value fropm the array to the DOM
 	filterTags.forEach((ingrTag) => {
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
-		filterByTags(receipiesArray, ingrTag)
 	})
+	// filteredRecipes.filter(recipie=>  )
+	const result = filteredRecipes.filter((rec) => {
+		rec.appliance != elemName
+	})
+	filteredRecipes = result
+	cards_container.textContent = ''
+	console.log(filteredRecipes)
+	if (filteredRecipes.length > 0) {
+		filteredRecipes.forEach((rec) => {
+			populateDom(rec)
+		})
+	} else {
+		receipiesArray.forEach((rec) => {
+			populateDom(rec)
+		})
+	}
 }
 
 function populateDom(recipie) {

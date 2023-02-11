@@ -93,7 +93,7 @@ export function domLists(element, indx, arrayName) {
 	return li
 }
 
-// tags in DOM return a dom element with its tag
+// tags in DOM return a dom element (button) with its tag
 export function tagToDom(elemName, arrayName) {
 	const classList = [
 		'btn',

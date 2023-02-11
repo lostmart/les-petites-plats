@@ -18,14 +18,18 @@ export const inputsfilter = (array, value) => {
 }
 
 // no se che ...
-export function filterByTags(receipies, ingrTag) {
+export function filterByTags(receipies, elemTag) {
 	const ingredientTest = (ingredient) => {
-		textFormatter(ingredient) === textFormatter(ingrTag)
+		textFormatter(ingredient) === textFormatter(elemTag)
 	}
 
 	return receipies.filter(
 		(recipie) => {
-			return recipie.appliance.toLowerCase() === ingrTag.toLowerCase()
+			const includes = recipie.ustensils.includes(elemTag)
+			const result =
+				textFormatter(recipie.appliance) === textFormatter(elemTag) ||
+				recipie.ustensils.includes(elemTag)
+			return result
 		}
 		// return recipie.ingredientsArray.some(ingredientTest)
 	)
