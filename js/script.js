@@ -11,15 +11,14 @@ import { recipes } from '/data/recipes.js'
 import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
 
 // GLOBAL variables
-let receipiesArray = [] // data for all the receipies
+const receipiesArray = [] // data for all the receipies ( not supposed to change)
 let ingredientsArray = [] // data for all the ingredients
 let appliancesArray = [] // data for all the appliances
 let utencilesArray = [] // data for all the utelciles
 let filteredRecipes = [] // data for all filtered recipes ( necessary for complex researches, with one than more param )
 let openChart = null
-
 let filterTags = [] // array of tags for filtering recipies
-let inpuFilteredTags = [] // array of tags filtered using the inputs (ingredients / appareils / ustensiles)
+// let inpuFilteredTags = [] // array of tags filtered using the inputs (ingredients / appareils / ustensiles)
 
 // DOM ELEMENTS
 const body = document.querySelector('body')
@@ -32,7 +31,6 @@ const ustensils_btn = document.querySelector('[data-btn="ustensiles"]')
 const error_msg = document.querySelector('[data-error-msg]')
 const filters_container = document.querySelector('[data-filters]')
 const inputsNodes = document.querySelectorAll('input[type=text]')
-
 const ul = document.querySelector('.dropdown-menu')
 
 const init = () => {
@@ -45,7 +43,9 @@ const init = () => {
 		const newRecipieFromModel = recipeFactory(rec)
 		populateDom(rec)
 		receipiesArray.push(newRecipieFromModel)
+		filteredRecipes = receipiesArray
 	})
+	// console.log(filteredRecipes)
 	// console.log(setItems())
 }
 
@@ -81,13 +81,14 @@ body.addEventListener('click', function (e) {
 	ul.textContent = ''
 })
 
-// big general search
+// BIG GERNERAL SEARCH
 rechGeneral.addEventListener('input', (e) => {
 	const value = textFormatter(e.target.value.trim())
-	if (value.length === 0) {
-		error_msg.classList.add('no-result')
-		receipiesArray.forEach((rec) => populateDom(rec))
-	}
+	// if (value.length === 0) {
+	// 	console.log('dont erase me !!!')
+	// 	error_msg.classList.add('no-result')
+	// 	receipiesArray.forEach((rec) => populateDom(rec))
+	// }
 	if (value.length > 2) {
 		const result = mainSeacrh(receipiesArray, value)
 		cards_container.textContent = ''
@@ -102,26 +103,31 @@ rechGeneral.addEventListener('input', (e) => {
 	}
 })
 
-// general search (backspace)
-rechGeneral.addEventListener('keydown', (e) => {
+// general search (backspace) => check value length and reset under value.length < 3
+rechGeneral.addEventListener('keyup', (e) => {
 	const value = textFormatter(e.target.value.trim())
 	if (e.key == 'Backspace') {
 		error_msg.classList.add('no-result')
 		filteredRecipes = mainSeacrh(receipiesArray, value)
-		cards_container.textContent = ''
-		filteredRecipes.forEach((recipie) => {
-			cards_container.append(createCard(recipie))
-		})
+		//console.log(value.length)
+		if (value.length < 3) {
+			resetFilter()
+		}
 	}
 })
 
-// clear search input
-rechGeneral.addEventListener('click', (e) => {
+// check if input is empty
+rechGeneral.addEventListener('focus', function (e) {
 	const value = textFormatter(e.target.value.trim())
-	if (value === '') {
-		error_msg.classList.add('no-result')
-		receipiesArray.forEach((rec) => populateDom(rec))
+	// console.log(value.length, typeof value)
+	if (value.length === 0) {
+		resetFilter()
 	}
+})
+
+// clear search input 'search' listener ( x )
+rechGeneral.addEventListener('search', (e) => {
+	resetFilter()
 })
 
 /*  ingredients listeners   */
@@ -284,7 +290,7 @@ export function createTags(indx, arrayName, elementName) {
 	// adds each value from the array to the DOM
 	filterTags.forEach((ingrTag) => {
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
-		filteredRecipes = filterByTags(receipiesArray, ingrTag)
+		filteredRecipes = filterByTags(filteredRecipes, ingrTag)
 		filteredRecipes.forEach((recipie) => populateDom(recipie))
 	})
 }
@@ -304,7 +310,7 @@ export function removeTag(elemName, arrayName) {
 	})
 	filteredRecipes = result
 	cards_container.textContent = ''
-	console.log(filteredRecipes)
+	// console.log(filteredRecipes)
 	if (filteredRecipes.length > 0) {
 		filteredRecipes.forEach((rec) => {
 			populateDom(rec)
@@ -316,13 +322,22 @@ export function removeTag(elemName, arrayName) {
 	}
 }
 
-function populateDom(recipie) {
-	cards_container.append(createCard(recipie))
+// appends a recipie model to the DOM based on a factory fn (utils.js)
+function populateDom(recipe) {
+	cards_container.append(createCard(recipe))
 }
 
 function toggleShow(elem) {
 	elem.classList.toggle('d-none')
 	elem.style.backgroundColor = '#3282f7'
+}
+
+// clears all the research
+function resetFilter() {
+	console.log('reset app ... ')
+	cards_container.textContent = ''
+	filteredRecipes = receipiesArray
+	receipiesArray.forEach((recipe) => populateDom(recipe))
 }
 
 init()
