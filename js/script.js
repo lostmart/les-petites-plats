@@ -55,7 +55,6 @@ form.addEventListener('submit', (e) => {
 
 body.addEventListener('click', function (e) {
 	if (openChart === 'ingredients') {
-		console.log('body click')
 		document.querySelectorAll('.form-control')[1].classList.toggle('d-none')
 		ingredients_btn.classList.toggle('d-none')
 		openChart = null
@@ -116,19 +115,12 @@ rechGeneral.addEventListener('keyup', (e) => {
 	}
 })
 
-// check if input is empty
-rechGeneral.addEventListener('focus', function (e) {
-	const value = textFormatter(e.target.value.trim())
-	// console.log(value.length, typeof value)
-	if (value.length === 0) {
-		resetFilter()
-	}
-})
-
 // clear search input 'search' listener ( x )
 rechGeneral.addEventListener('search', (e) => {
 	resetFilter()
 })
+
+/*  TAGS SEARCH    */
 
 /*  ingredients listeners   */
 ingredients_btn.addEventListener('click', function (e) {
