@@ -78,7 +78,7 @@ export function domLists(element, indx, arrayName) {
 	link.ariaPressed = 'false'
 	link.textContent = element
 	li.append(link)
-	li.setAttribute('data-indx', indx)
+	li.setAttribute('data-indx', indx) // not using it ... ?
 	li.setAttribute('data-array', '')
 	li.classList.add('list-group-item')
 
@@ -87,7 +87,7 @@ export function domLists(element, indx, arrayName) {
 		e.stopPropagation()
 		const elementName = this.textContent.toLocaleLowerCase()
 		// pass arrayName to know which tag to add
-		createTags(this.getAttribute('data-indx'), arrayName, elementName)
+		createTags(arrayName, elementName)
 	})
 
 	return li

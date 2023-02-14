@@ -249,12 +249,13 @@ inputsNodes.forEach((input) =>
 
 /*  GENERAL FUNCTIONS   */
 
-// populates filterTags array with new tags selected
-// arrayName  ( ingredients, appareils or ustensils )
-export function createTags(indx, arrayName, elementName) {
+// populate filterTags array with new tags selected
+// based on the arrayName used  ( ingredients, appareils or ustensils )
+export function createTags(arrayName, elementName) {
 	cards_container.textContent = ''
 	filters_container.textContent = ''
 	let selectedItem = null
+	// populate (ingredientsArray, appliancesArray or utencilesArray )
 	// check which array we need to add
 	if (arrayName === 'ingredients_array') {
 		// ingredients
@@ -264,28 +265,64 @@ export function createTags(indx, arrayName, elementName) {
 	}
 	if (arrayName === 'appliance_array') {
 		const dynamiIndx = appliancesArray.indexOf(elementName)
-
 		// appliances
 		selectedItem = appliancesArray[dynamiIndx]
 	}
-	//ustensils
 	if (arrayName === 'ustensils_array') {
+		//ustensils
 		const dynamiIndx = utencilesArray.indexOf(elementName)
 		// appliances
 		selectedItem = utencilesArray[dynamiIndx]
 	}
+	// populate filterTags
 	// checks if it's already in the array
 	if (!filterTags.includes(selectedItem)) {
 		filterTags.push(selectedItem)
 	}
+	// populate tags to DOM
+	filterTags.forEach((ingrTag) => {
+		filters_container.append(tagToDom(makeCapital(ingrTag)))
+	})
 
-	// adds each value from the array to the DOM
+	if (filterTags.length === 1) {
+		filteredRecipes = filterByTags(receipiesArray, filterTags[0])
+	} else {
+		const res = receipiesArray.filter((recipie) => {
+			return filterTags.includes(recipie)
+		})
+		console.log(filterTags, filteredRecipes, res)
+	}
+
+	// populate DOM with filtered recipies
+	filteredRecipes.forEach((recipe) => {
+		// console.log(recipe.ingredientsArray)
+		populateDom(recipe)
+	})
+}
+
+/*
+
+	// adds each tag value from the array to the DOM
+	// filters the recipies
+	// evaluate if there is one or more tags to filter the recipies
+
+	if (filterTags.length === 1) {
+		console.log('you can run one filter tag')
+	} else {
+		console.log('you can run multiple filter tag')
+	}
+
 	filterTags.forEach((ingrTag) => {
 		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
 		filteredRecipes = filterByTags(filteredRecipes, ingrTag)
-		filteredRecipes.forEach((recipie) => populateDom(recipie))
+		filteredRecipes.forEach((recipie) => {
+			populateDom(recipie)
+		})
+		console.log(filterTags)
 	})
-}
+
+
+	*/
 
 export function removeTag(elemName, arrayName) {
 	elemName = elemName.toLowerCase()
@@ -326,7 +363,7 @@ function toggleShow(elem) {
 
 // clears all the research
 function resetFilter() {
-	console.log('reset app ... ')
+	// console.log('reset app ... ')
 	cards_container.textContent = ''
 	filteredRecipes = receipiesArray
 	receipiesArray.forEach((recipe) => populateDom(recipe))

@@ -17,7 +17,7 @@ export const inputsfilter = (array, value) => {
 	return result
 }
 
-// no se che ...
+// filter based on the tags ( ingredients, appliances, ustensils )
 export function filterByTags(receipies, elemTag) {
 	const ingredientTest = (ingredient) => {
 		textFormatter(ingredient) === textFormatter(elemTag)
@@ -25,14 +25,7 @@ export function filterByTags(receipies, elemTag) {
 
 	return receipies.filter(
 		(recipie) => {
-			const includes = recipie.ingredientsArray.includes(makeCapital(elemTag))
-			// recipie.ingredientsArray.forEach((rec) => {
-			// 	// console.log(textFormatter(rec), textFormatter(elemTag))
-			// 	if (textFormatter(rec) === textFormatter(elemTag)) {
-			// 		console.log('encontrado !')
-			// 	}
-			// })
-			//console.log(makeCapital(elemTag))
+			// const includes = recipie.ingredientsArray.includes(makeCapital(elemTag))
 			const result =
 				textFormatter(recipie.appliance) === textFormatter(elemTag) ||
 				recipie.ustensils.includes(elemTag) ||
