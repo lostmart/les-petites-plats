@@ -8,7 +8,12 @@ import {
 } from './factories/Utils.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '/data/recipes.js'
-import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
+// import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
+import {
+	mainSeacrh,
+	filterByTags,
+	inputsfilter,
+} from './factories/FiltersNative.js'
 
 // GLOBAL variables
 const receipiesArray = [] // data for all the receipies ( not supposed to change)
@@ -287,10 +292,15 @@ export function createTags(arrayName, elementName) {
 	if (filterTags.length === 1) {
 		filteredRecipes = filterByTags(receipiesArray, filterTags[0])
 	} else {
-		const res = receipiesArray.filter((recipie) => {
-			return filterTags.includes(recipie)
-		})
-		console.log(filterTags, filteredRecipes, res)
+		filteredRecipes = receipiesArray
+			.map((recipie) => {
+				if (recipie.ingredientsArray.find((ing) => filterTags.includes(ing))) {
+					return recipie
+				}
+			})
+			.filter((reci) => !!reci)
+
+		// res.forEach((r) => console.log(r.ingredientsArray))
 	}
 
 	// populate DOM with filtered recipies
