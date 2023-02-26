@@ -1,4 +1,4 @@
-import { textFormatter } from './Utils.js'
+import { textFormatter } from "./Utils.js"
 // returns the result of the main search (name || description || ingredients)
 /*
 export const mainSeacrh = (receipies, value) => {
@@ -46,7 +46,19 @@ export function filterByTags(receipies, elemTag) {
 	const ingredientTest = (ingredient) => {
 		textFormatter(ingredient) === textFormatter(elemTag)
 	}
+	const result = []
+	for (let i = 0; i < receipies.length; i++) {
+		const recipie = receipies[i]
+		if (
+			textFormatter(recipie.appliance) === textFormatter(elemTag) ||
+			recipie.ustensils.includes(textFormatter(elemTag))
+		) {
+			result.push(recipie)
+		}
+	}
+	return result
 
+	/*
 	return receipies.filter(
 		(recipie) => {
 			const result =
@@ -57,6 +69,7 @@ export function filterByTags(receipies, elemTag) {
 		}
 		// return recipie.ingredientsArray.some(ingredientTest)
 	)
+	*/
 }
 
 /*
