@@ -1,17 +1,6 @@
-import { textFormatter } from "./Utils.js"
+import { textFormatter } from './Utils.js'
 // returns the result of the main search (name || description || ingredients)
-/*
-export const mainSeacrh = (receipies, value) => {
-	const ingredientTest = (ingredient) => {
-		textFormatter(ingredient).includes(textFormatter(value))
-	}
-	return receipies.filter(
-		(recipie) =>
-			recipie.name.toLowerCase().includes(textFormatter(value)) ||
-			recipie.description.toLowerCase().includes(textFormatter(value)) ||
-			recipie.ingredientsArray.some(ingredientTest)
-	)
-}*/
+
 export const mainSeacrh = (receipies, value) => {
 	const result = []
 	for (let i = 0; i < receipies.length; i++) {
@@ -29,7 +18,6 @@ export const mainSeacrh = (receipies, value) => {
 				result.push(recipie)
 			}
 		}
-		// console.log(recipie.ingredientsArray)
 
 		//console.log(recipie.ingredientsArray.forEach((ing) => console.log(ing)))
 	}
@@ -55,6 +43,30 @@ export function filterByTags(receipies, elemTag) {
 		) {
 			result.push(recipie)
 		}
+
+		let ii = 0
+		while (ii < recipie.ingredientsArray.length) {
+			const ing = recipie.ingredientsArray[ii]
+			ii++
+			console.log(textFormatter(ing), textFormatter(elemTag))
+			if (textFormatter(ing) === textFormatter(elemTag)) {
+				result.push(recipie)
+			}
+		}
+		/*
+			recipie.ingredientsArray.forEach((ing) => {
+				console.log(textFormatter(ing), textFormatter(elemTag))
+			})
+			*/
+
+		/*
+		for (let ii = 0; ii < recipie.ingredientsArray.length; ii++) {
+			const ing = recipie.ingredientsArray[i]
+			if (ing && ing.includes(textFormatter(value))) {
+				result.push(recipie)
+			}
+		}
+		*/
 	}
 	return result
 
