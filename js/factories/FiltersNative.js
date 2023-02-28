@@ -31,9 +31,6 @@ export const inputsfilter = (array, value) => {
 
 // filter based on the tags ( ingredients, appliances, ustensils )
 export function filterByTags(receipies, elemTag) {
-	const ingredientTest = (ingredient) => {
-		textFormatter(ingredient) === textFormatter(elemTag)
-	}
 	const result = []
 	for (let i = 0; i < receipies.length; i++) {
 		const recipie = receipies[i]
@@ -53,47 +50,6 @@ export function filterByTags(receipies, elemTag) {
 				result.push(recipie)
 			}
 		}
-		/*
-			recipie.ingredientsArray.forEach((ing) => {
-				console.log(textFormatter(ing), textFormatter(elemTag))
-			})
-			*/
-
-		/*
-		for (let ii = 0; ii < recipie.ingredientsArray.length; ii++) {
-			const ing = recipie.ingredientsArray[i]
-			if (ing && ing.includes(textFormatter(value))) {
-				result.push(recipie)
-			}
-		}
-		*/
 	}
 	return result
-
-	/*
-	return receipies.filter(
-		(recipie) => {
-			const result =
-				textFormatter(recipie.appliance) === textFormatter(elemTag) ||
-				recipie.ustensils.includes(elemTag) ||
-				recipie.ingredientsArray.includes(elemTag)
-			return result
-		}
-		// return recipie.ingredientsArray.some(ingredientTest)
-	)
-	*/
 }
-
-/*
-wrie the equivalkent of a filter function with native loops 
-
-var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-var filtered = [];
-for (var i = 0; i < numbers.length; i++) {
-  if (numbers[i] % 2 === 0) {
-    filtered.push(numbers[i]);
-  }
-}
-console.log(filtered)
-
-*/

@@ -19,19 +19,11 @@ export const inputsfilter = (array, value) => {
 
 // filter based on the tags ( ingredients, appliances, ustensils )
 export function filterByTags(receipies, elemTag) {
-	const ingredientTest = (ingredient) => {
-		textFormatter(ingredient) === textFormatter(elemTag)
-	}
-
-	return receipies.filter(
-		(recipie) => {
-			// const includes = recipie.ingredientsArray.includes(makeCapital(elemTag))
-			const result =
-				textFormatter(recipie.appliance) === textFormatter(elemTag) ||
-				recipie.ustensils.includes(elemTag) ||
-				recipie.ingredientsArray.includes(elemTag)
-			return result
-		}
-		// return recipie.ingredientsArray.some(ingredientTest)
-	)
+	return receipies.filter((recipie) => {
+		const result =
+			textFormatter(recipie.appliance) === textFormatter(elemTag) ||
+			recipie.ustensils.includes(elemTag) ||
+			recipie.ingredientsArray.includes(elemTag)
+		return result
+	})
 }
