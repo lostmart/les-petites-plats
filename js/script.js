@@ -23,7 +23,6 @@ let utencilesArray = [] // data for all the utelciles
 let filteredRecipes = [] // data for all filtered recipes ( necessary for complex researches, with one than more param )
 let openChart = null
 let filterTags = [] // array of tags for filtering recipies
-// let inpuFilteredTags = [] // array of tags filtered using the inputs (ingredients / appareils / ustensiles)
 
 // DOM ELEMENTS
 const body = document.querySelector('body')
@@ -50,8 +49,6 @@ const init = () => {
 		receipiesArray.push(newRecipieFromModel)
 		filteredRecipes = receipiesArray
 	})
-	// console.log(filteredRecipes)
-	// console.log(setItems())
 }
 
 form.addEventListener('submit', (e) => {
@@ -88,11 +85,6 @@ body.addEventListener('click', function (e) {
 // BIG GERNERAL SEARCH
 rechGeneral.addEventListener('input', (e) => {
 	const value = textFormatter(e.target.value.trim())
-	// if (value.length === 0) {
-	// 	console.log('dont erase me !!!')
-	// 	error_msg.classList.add('no-result')
-	// 	receipiesArray.forEach((rec) => populateDom(rec))
-	// }
 	if (value.length > 2) {
 		const result = mainSeacrh(receipiesArray, value)
 		cards_container.textContent = ''
@@ -113,7 +105,6 @@ rechGeneral.addEventListener('keyup', (e) => {
 	if (e.key == 'Backspace') {
 		error_msg.classList.add('no-result')
 		filteredRecipes = mainSeacrh(receipiesArray, value)
-		//console.log(value.length)
 		if (value.length < 3) {
 			resetFilter()
 		}
@@ -309,30 +300,6 @@ export function createTags(arrayName, elementName) {
 		populateDom(recipe)
 	})
 }
-
-/*
-
-	// adds each tag value from the array to the DOM
-	// filters the recipies
-	// evaluate if there is one or more tags to filter the recipies
-
-	if (filterTags.length === 1) {
-		console.log('you can run one filter tag')
-	} else {
-		console.log('you can run multiple filter tag')
-	}
-
-	filterTags.forEach((ingrTag) => {
-		filters_container.append(tagToDom(makeCapital(ingrTag), arrayName))
-		filteredRecipes = filterByTags(filteredRecipes, ingrTag)
-		filteredRecipes.forEach((recipie) => {
-			populateDom(recipie)
-		})
-		console.log(filterTags)
-	})
-
-
-	*/
 
 export function removeTag(elemName, arrayName) {
 	elemName = elemName.toLowerCase()

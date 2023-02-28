@@ -18,8 +18,6 @@ export const mainSeacrh = (receipies, value) => {
 				result.push(recipie)
 			}
 		}
-
-		//console.log(recipie.ingredientsArray.forEach((ing) => console.log(ing)))
 	}
 	return result
 }
@@ -45,7 +43,6 @@ export function filterByTags(receipies, elemTag) {
 		while (ii < recipie.ingredientsArray.length) {
 			const ing = recipie.ingredientsArray[ii]
 			ii++
-			console.log(textFormatter(ing), textFormatter(elemTag))
 			if (textFormatter(ing) === textFormatter(elemTag)) {
 				result.push(recipie)
 			}
