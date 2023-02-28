@@ -8,12 +8,12 @@ import {
 } from './factories/Utils.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '/data/recipes.js'
-// import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
-import {
-	mainSeacrh,
-	filterByTags,
-	inputsfilter,
-} from './factories/FiltersNative.js'
+import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
+// import {
+// 	mainSeacrh,
+// 	filterByTags,
+// 	inputsfilter,
+// } from './factories/FiltersNative.js'
 
 // GLOBAL variables
 const receipiesArray = [] // data for all the receipies ( not supposed to change)
