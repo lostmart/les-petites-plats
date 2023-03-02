@@ -8,12 +8,12 @@ import {
 } from './factories/Utils.js'
 import setItems from './factories/DataArrays.js'
 import { recipes } from '/data/recipes.js'
-import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
-// import {
-// 	mainSeacrh,
-// 	filterByTags,
-// 	inputsfilter,
-// } from './factories/FiltersNative.js'
+// import { mainSeacrh, filterByTags, inputsfilter } from './factories/Filters.js'
+import {
+	mainSeacrh,
+	filterByTags,
+	inputsfilter,
+} from './factories/FiltersNative.js'
 
 // GLOBAL variables
 const receipiesArray = [] // data for all the receipies ( not supposed to change)
@@ -341,6 +341,7 @@ function toggleShow(elem) {
 // clears all the research
 function resetFilter() {
 	cards_container.textContent = ''
+	error_msg.classList.add('no-result')
 	filteredRecipes = receipiesArray
 	receipiesArray.forEach((recipe) => populateDom(recipe))
 }
