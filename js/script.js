@@ -363,7 +363,7 @@ function toggleShow(elem) {
 
 // clears all the research
 function resetFilter() {
-	// console.log('reset app ... ')
+	error_msg.classList.add('no-result')
 	cards_container.textContent = ''
 	filteredRecipes = receipiesArray
 	receipiesArray.forEach((recipe) => populateDom(recipe))
